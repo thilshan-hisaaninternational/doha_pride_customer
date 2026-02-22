@@ -1,5 +1,6 @@
 import 'package:doha_pride_customer/features/auth/presentation/pages/signin_page.dart';
 import 'package:doha_pride_customer/features/auth/presentation/pages/signup_page.dart';
+import 'package:doha_pride_customer/features/home/presentation/pages/home_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: AppRoutes.splash,
-        builder: (context, state) => const SignupPage(), // SplashPage()
+        builder: (context, state) => const HomePage(), // SplashPage()
       ),
       GoRoute(
         path: AppRoutes.login,
@@ -21,7 +22,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => const Placeholder(), // HomPage()
+        builder: (context, state) => const HomePage(), // HomPage()
       ),
       GoRoute(
         path: AppRoutes.transfers,

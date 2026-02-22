@@ -31,6 +31,13 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
+    static TextStyle get heading4 => TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textPrimary,
+  );
+
   static TextStyle get bodyLarge => TextStyle(
     fontFamily: _fontFamily,
     fontSize: 16.sp,
