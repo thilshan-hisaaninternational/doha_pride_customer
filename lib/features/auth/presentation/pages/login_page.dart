@@ -1,13 +1,12 @@
-import 'package:doha_pride_customer/core/router/app_router.dart';
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
+import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
-import 'package:doha_pride_customer/core/theme/app_theme.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_button.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+import 'package:iconsax/iconsax.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -96,11 +95,12 @@ class _LoginPageState extends State<LoginPage> {
 
                   AppTextField(
                     controller: _emailController,
-                    label: 'Enter your email',
+                    label: 'Email or Username',
                     prefixIcon: Icon(
-                      Icons.email_outlined,
+                      // Icons.email_outlined,
+                      Iconsax.user,
                       color: AppColors.textSecondary,
-                      size: 20.sp,
+                      size: AppIconSizes.sm,
                     ),
                     keyboardType:
                         TextInputType.emailAddress, // 👈 right keyboard
@@ -108,13 +108,13 @@ class _LoginPageState extends State<LoginPage> {
                         TextInputAction.next, // 👈 next on keyboard
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                        return 'Please enter your email or username';
                       }
-                      if (!RegExp(
-                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                      ).hasMatch(value)) {
-                        return 'Please enter a valid email';
-                      }
+                      // if (!RegExp(
+                      //   r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                      // ).hasMatch(value)) {
+                      //   return 'Please enter a valid email';
+                      // }
                       return null;
                     },
                   ),
@@ -123,14 +123,14 @@ class _LoginPageState extends State<LoginPage> {
 
                   AppTextField(
                     controller: _passwordController,
-                    label: 'Enter your password',
+                    label: 'Password',
                     obscureText: _obscurePassword,
                     textInputAction: TextInputAction.done, //  done on keyboard
                     onFieldSubmitted: (_) => _login(), //  login on done press
                     prefixIcon: Icon(
-                      Icons.lock_outline,
+                      Iconsax.lock,
                       color: AppColors.textSecondary,
-                      size: 20.sp,
+                      // size: AppIconSizes.sm,
                     ),
                     suffixIcon: IconButton(
                       // 👈 show/hide password
@@ -139,10 +139,10 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       icon: Icon(
                         _obscurePassword
-                            ? Icons.visibility_outlined
-                            : Icons.visibility_off_outlined,
+                            ? Iconsax.eye_slash
+                            : Iconsax.eye,
                         color: AppColors.textSecondary,
-                        size: 20.sp,
+                        size: AppIconSizes.sm,
                       ),
                     ),
                     validator: (value) {
@@ -155,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                       return null;
                     },
                   ),
+                  SizedBox(height: AppSpacing.sm),
 
                   // ── Forgot Password ────────────────────────────────
                   Align(
