@@ -1,7 +1,15 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class AppSpacing {
-  static const double xs = 4;
-  static const double sm = 8;
-  static const double md = 16;
-  static const double lg = 24;
-  static const double xl = 32;
+    AppSpacing._(); // Private constructor to prevent instantiation
+
+  static double get xs  => 4.h;
+  static double get sm  => 8.h;
+  static double get md  => 16.h;
+  static double get lg  => 24.h;
+  static double get xl  => 32.h;
+  static double get xxl => 48.h;
+
+  // horizontal padding for all screens
+  static double get screenPadding => 20.w;
 }
