@@ -1,3 +1,4 @@
+import 'package:doha_pride_customer/core/router/app_router.dart';
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
@@ -6,16 +7,17 @@ import 'package:doha_pride_customer/features/auth/presentation/widgets/app_butto
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SigninPageState extends State<SigninPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -138,9 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() => _obscurePassword = !_obscurePassword);
                       },
                       icon: Icon(
-                        _obscurePassword
-                            ? Iconsax.eye_slash
-                            : Iconsax.eye,
+                        _obscurePassword ? Iconsax.eye_slash : Iconsax.eye,
                         color: AppColors.textSecondary,
                         size: AppIconSizes.sm,
                       ),
@@ -219,9 +219,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            // context.push(AppRoutes.register);
-                          },
+                          onTap: () => context.go(AppRoutes.signUp),
+
                           child: Text(
                             'Sign Up',
                             style: AppTextStyles.bodyMedium.copyWith(

@@ -40,6 +40,7 @@ class AppTheme {
 
   static ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
+    fontFamily: 'Poppins',
     scaffoldBackgroundColor: AppColors.background,
     colorScheme: const ColorScheme.light(
       primary: AppColors.primary,

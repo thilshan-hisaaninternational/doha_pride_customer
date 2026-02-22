@@ -12,4 +12,5 @@ class AppSpacing {
 
   // horizontal padding for all screens
   static double get screenPadding => 20.w;
+  static double get screenPaddingsm => 4.w;
 }

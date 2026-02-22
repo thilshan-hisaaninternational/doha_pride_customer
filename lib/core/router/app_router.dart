@@ -1,5 +1,5 @@
-import 'package:doha_pride_customer/features/auth/presentation/pages/login_page.dart';
-import 'package:doha_pride_customer/features/splash/presentation/pages/splash_page.dart';
+import 'package:doha_pride_customer/features/auth/presentation/pages/signin_page.dart';
+import 'package:doha_pride_customer/features/auth/presentation/pages/signup_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
@@ -9,15 +9,19 @@ class AppRouter {
     routes: [
       GoRoute(
         path: AppRoutes.splash,
-        builder: (context, state) => const LoginPage(), // SplashPage()
+        builder: (context, state) => const SignupPage(), // SplashPage()
       ),
       GoRoute(
         path: AppRoutes.login,
-        builder: (context, state) => const LoginPage(), // LoginPage()
+        builder: (context, state) => const SigninPage(), // SigninPage()
+      ),
+            GoRoute(
+        path: AppRoutes.signUp,
+        builder: (context, state) => const SignupPage(), // SignUpPage()
       ),
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => const Placeholder(), // HomePage()
+        builder: (context, state) => const Placeholder(), // HomPage()
       ),
       GoRoute(
         path: AppRoutes.transfers,
@@ -48,6 +52,7 @@ class AppRoutes {
 
   static const String splash        = '/';
   static const String login         = '/login';
+  static const String signUp        = '/signup';
   static const String home          = '/home';
   static const String transfers     = '/transfers';
   static const String meetGreet     = '/meet-greet';
