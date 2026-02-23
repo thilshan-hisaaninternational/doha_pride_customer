@@ -6,6 +6,7 @@ import 'package:doha_pride_customer/features/home/presentation/widgets/home_need
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_package_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_search_bar.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_section_header.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_see_all_arrow_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/homes_transfer_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/meet_and_greet_card.dart';
 import 'package:flutter/material.dart';
@@ -66,10 +67,54 @@ class _HomePageState extends State<HomePage> {
       'tag': 'New',
       'tagColor': 0xFF10B981,
     },
+    {
+      'title': 'Transfer',
+      'subtitle': 'Full Day Experience',
+      'price': 'QAR 450',
+      'rating': '4.9',
+      'image':
+          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+      'tag': 'Best Seller',
+      'tagColor': 0xFFD4A843,
+    },
+    {
+      'title': 'Transfer',
+      'subtitle': 'Full Day Experience',
+      'price': 'QAR 450',
+      'rating': '4.9',
+      'image':
+          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+      'tag': 'Best Seller',
+      'tagColor': 0xFFD4A843,
+    },
   ];
 
   final List<Map<String, dynamic>> _transfers = [
     {
+      'title': 'Airport Transfer',
+      'subtitle': 'Hamad Intl → City Center',
+      'price': 'QAR 150',
+      'vehicle': 'Sedan',
+      'image':
+          'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400',
+    },
+    {
+      'title': 'Luxury Transfer',
+      'subtitle': 'Hamad Intl → The Pearl',
+      'price': 'QAR 280',
+      'vehicle': 'SUV',
+      'image':
+          'https://images.unsplash.com/photo-1571987502951-3fba0c0bed40?w=400',
+    },
+    {
+      'title': 'Group Transfer',
+      'subtitle': 'Airport → West Bay',
+      'price': 'QAR 200',
+      'vehicle': 'Van',
+      'image':
+          'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400',
+    },
+        {
       'title': 'Airport Transfer',
       'subtitle': 'Hamad Intl → City Center',
       'price': 'QAR 150',
@@ -103,35 +148,17 @@ class _HomePageState extends State<HomePage> {
     {'icon': Iconsax.building_4, 'label': 'Hotels', 'color': 0xFF8B5CF6},
   ];
 
-  // ── Bottom Nav Items ─────────────────────────────────────────────
-
-  // final List<Map<String, dynamic>> _navItems = [
-  //   {'icon': Iconsax.home, 'activeIcon': Iconsax.home5, 'label': 'Home'},
-  //   {
-  //     'icon': Iconsax.category,
-  //     'activeIcon': Iconsax.category5,
-  //     'label': 'Services',
-  //   },
-  //   {
-  //     'icon': Iconsax.ticket_2,
-  //     'activeIcon': Iconsax.ticket_25,
-  //     'label': 'Bookings',
-  //   },
-  //   {
-  //     'icon': Iconsax.profile_circle,
-  //     'activeIcon': Iconsax.profile_circle5,
-  //     'label': 'Profile',
-  //   },
-  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       key: _scaffoldKey,
       backgroundColor: AppColors.background,
       drawer: _buildDrawer(),
       // extendBody: true, //
       body: SafeArea(
         bottom: false,
+        // top: true,
         child: CustomScrollView(
           slivers: [
             // ── App Bar ─────────────────────────────────────────
@@ -154,7 +181,6 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: HomeSearchBar()),
             SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
 
-
             SliverToBoxAdapter(child: MeetAndGreetCard(onBookTap: () {})),
 
             // ── Section: Our Services ────────────────────────
@@ -174,14 +200,15 @@ class _HomePageState extends State<HomePage> {
 
             SliverToBoxAdapter(child: _buildTransfers()),
 
+            // SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
+            // SliverToBoxAdapter(child:  SeeAllArrowCard(onTap: () {
+
+            // },)),
             SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
 
             // ── Section: Meet & Greet ─────────────────────────────
             // SliverToBoxAdapter(child: MeetAndGreetCard(onBookTap: () {})),
-
-            SliverToBoxAdapter(
-  child: HomeNeedHelp(),
-),
+            SliverToBoxAdapter(child: HomeNeedHelp()),
 
             // bottom padding so content doesn't hide behind floating nav
             SliverToBoxAdapter(child: SizedBox(height: 110.h)),
@@ -200,9 +227,17 @@ class _HomePageState extends State<HomePage> {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-        itemCount: _featuredPackages.length,
+        itemCount: _featuredPackages.length > 5 ? 6 : _featuredPackages.length,
         separatorBuilder: (_, __) => SizedBox(width: 12.w),
         itemBuilder: (context, index) {
+          // If more than 5 services and index == 5 → show arrow
+          if (_featuredPackages.length > 5 && index == 5) {
+            return SeeAllArrowCard(
+              onTap: () {
+                // navigate to full packages list
+              },
+            );
+          }
           final item = _featuredPackages[index];
           return FeaturedPackageCard(item: item);
         },
@@ -218,9 +253,17 @@ class _HomePageState extends State<HomePage> {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-        itemCount: _transfers.length,
+        itemCount: _transfers.length > 5 ? 6 : _transfers.length,
         separatorBuilder: (_, __) => SizedBox(width: 12.w),
         itemBuilder: (context, index) {
+          // If more than 5 services and index == 5 → show arrow
+          if (_transfers.length > 5 && index == 5) {
+            return SeeAllArrowCard(
+              onTap: () {
+                // navigate to full transfers list
+              },
+            );
+          }
           final item = _transfers[index];
           return TransferCard(item: item);
         },
@@ -263,7 +306,7 @@ Widget _buildDrawer() {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: AppColors.accent, width: 2),
-                    gradient:  LinearGradient(
+                    gradient: LinearGradient(
                       colors: [AppColors.accent, AppColors.primary],
                     ),
                   ),
@@ -335,4 +378,3 @@ Widget _drawerItem(
         : null,
   );
 }
-
