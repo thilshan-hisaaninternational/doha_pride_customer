@@ -7,8 +7,9 @@ import 'package:iconsax/iconsax.dart';
 
 class HomeSearchBar extends StatelessWidget {
   final VoidCallback? onTap;
+  final String? hintText;
 
-  const HomeSearchBar({super.key, this.onTap});
+  const HomeSearchBar({super.key, this.onTap, this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +43,20 @@ class HomeSearchBar extends StatelessWidget {
               ),
               SizedBox(width: 12.w),
               Text(
-                'Search services, packages...',
+                hintText ?? 'Search services, packages...',
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.textHint,
                 ),
               ),
               const Spacer(),
-              Padding(
-                padding: EdgeInsets.all(6.w),
-                child: Icon(
-                  Iconsax.setting_4,
-                  size: 18.sp,
-                  color: AppColors.textSecondary,
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.all(6.w),
+              //   child: Icon(
+              //     Iconsax.setting_4,
+              //     size: 18.sp,
+              //     color: AppColors.textSecondary,
+              //   ),
+              // ),
             ],
           ),
         ),

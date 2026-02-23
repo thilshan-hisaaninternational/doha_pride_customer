@@ -7,15 +7,6 @@ import 'core/di/dependency_injection.dart' as di ;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,        // transparent so your bg shows
-      statusBarIconBrightness: Brightness.dark,  // dark icons for light background
-      statusBarBrightness: Brightness.light,     // iOS
-    ),
-  );
-
-
   await di.initDependencies();
   runApp(const DohaprideApp());
 }

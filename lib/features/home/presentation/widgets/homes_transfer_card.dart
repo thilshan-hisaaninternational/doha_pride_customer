@@ -8,11 +8,7 @@ class TransferCard extends StatelessWidget {
   final Map<String, dynamic> item;
   final VoidCallback? onTap;
 
-  const TransferCard({
-    super.key,
-    required this.item,
-    this.onTap,
-  });
+  const TransferCard({super.key, required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +42,7 @@ class TransferCard extends StatelessWidget {
                   item['image'],
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: AppColors.primary.withValues(alpha: 0.1),
                     child: Icon(
                       Iconsax.car,
                       color: AppColors.primary,
@@ -79,34 +75,32 @@ class TransferCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 8.h),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 3.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(6.r),
-                          ),
-                          child: Text(
-                            item['vehicle'],
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 3.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(6.r),
+                      ),
+                      child: Text(
+                        item['vehicle'],
+                        style: AppTextStyles.caption.copyWith(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w600,
                         ),
-                        const Spacer(),
-                        Text(
-                          item['price'],
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.accent,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
+                      ),
+                    ),
+
+                    SizedBox(height: 5.h),
+
+                    Text(
+                      item['price'],
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.accent,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),

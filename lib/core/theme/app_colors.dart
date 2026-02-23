@@ -46,6 +46,7 @@ class AppColors {
 
   // Error
   static const Color error = Color(0xFFB00020);
+  static const Color success = Color(0xFF4CAF50);
 
   //Card bg
   static const Color cardBg = Color(0xFFFFFFFF);

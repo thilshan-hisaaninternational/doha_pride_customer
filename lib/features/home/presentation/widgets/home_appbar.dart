@@ -1,9 +1,8 @@
-import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/theme/app_text_styles.dart';
 
 
 class HomeAppBar extends StatelessWidget {
@@ -69,11 +68,26 @@ class HomeAppBar extends StatelessWidget {
               decoration: BoxDecoration(
               
               ),
-              child: Icon(
-                Icons.notifications_none, 
-                size: AppIconSizes.md,
-                // color: AppColors.primary,
-              ),
+              child:   Container(
+            width: 42.w,
+            height: 42.w,
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(12.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.06),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Icon(
+              Iconsax.notification,
+              size: 20.sp,
+              color: AppColors.textPrimary,
+            ),
+          ),
             ),
           ),
         ],
