@@ -74,6 +74,7 @@ import 'package:doha_pride_customer/features/auth/presentation/pages/signup_page
 import 'package:doha_pride_customer/features/home/presentation/pages/booking_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_shell.dart';
+import 'package:doha_pride_customer/features/home/presentation/pages/profile_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/services_page.dart';
 import 'package:doha_pride_customer/features/splash/presentation/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';
@@ -144,7 +145,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: AppRoutes.profile,
-                builder: (context, state) => const HomePage(),
+                builder: (context, state) => const ProfileTab(),
               ),
             ],
           ),
