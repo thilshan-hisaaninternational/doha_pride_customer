@@ -1,4 +1,3 @@
-// features/bookings/presentation/pages/bookings_tab.dart
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
-// Tab filter options
 enum BookingFilter { all, upcoming, completed, cancelled }
 
 class BookingsTab extends StatefulWidget {
@@ -208,37 +206,6 @@ class _BookingsTabState extends State<BookingsTab> {
     );
   }
 
-  // ── Stats Row ───────────────────────────────────────────────────
-
-  Widget _buildStatsRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-      child: Row(
-        children: [
-          _StatCard(
-            label: 'Upcoming',
-            count: _upcomingCount,
-            color: AppColors.primary,
-            icon: Iconsax.clock,
-          ),
-          SizedBox(width: 10.w),
-          _StatCard(
-            label: 'Completed',
-            count: _completedCount,
-            color: AppColors.success,
-            icon: Iconsax.tick_circle,
-          ),
-          SizedBox(width: 10.w),
-          _StatCard(
-            label: 'Cancelled',
-            count: _cancelledCount,
-            color: AppColors.error,
-            icon: Iconsax.close_circle,
-          ),
-        ],
-      ),
-    );
-  }
 
   // ── Filter Tabs ─────────────────────────────────────────────────
 
@@ -264,14 +231,14 @@ class _BookingsTabState extends State<BookingsTab> {
                 boxShadow: isActive
                     ? [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withValues(alpha:  0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 3),
                         ),
                       ]
                     : [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 4,
                           offset: const Offset(0, 1),
                         ),
@@ -371,53 +338,3 @@ class _BookingsTabState extends State<BookingsTab> {
   }
 }
 
-// ── Stat Card ─────────────────────────────────────────────────────────────────
-
-class _StatCard extends StatelessWidget {
-  final String label;
-  final int count;
-  final Color color;
-  final IconData icon;
-
-  const _StatCard({
-    required this.label,
-    required this.count,
-    required this.color,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.08),
-          borderRadius: BorderRadius.circular(14.r),
-          border: Border.all(color: color.withOpacity(0.2)),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, size: 18.sp, color: color),
-            SizedBox(width: 8.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$count',
-                  style: AppTextStyles.heading3.copyWith(color: color),
-                ),
-                Text(
-                  label,
-                  style: AppTextStyles.caption.copyWith(
-                    color: color.withOpacity(0.8),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

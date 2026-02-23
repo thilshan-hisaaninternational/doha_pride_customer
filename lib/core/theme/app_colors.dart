@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
 
-// class AppColors {
-//   // Light Theme Colors (from your portal CSS)
-//   static const primary = Color(0xFF8B1D3D);
-//   static const secondary = Color(0xFF1F8A9B);
-//   static const accent = Color(0xFF6EC1CC);
-//   static const neutralLight = Color(0xFFE6E6E6);
-//   static const white = Color(0xFFFFFFFF);
-
-//   // Dark Theme Colors (future ready)
-//   static const darkBackground = Color(0xFF121212);
-//   static const darkSurface = Color(0xFF1E1E1E);
-//   static const darkText = Color(0xFFFFFFFF);
-// }
-
 class AppColors {
   AppColors._();
 
