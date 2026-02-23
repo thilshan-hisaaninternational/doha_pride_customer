@@ -2,8 +2,11 @@ import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_appbar.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_need_help.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_package_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_search_bar.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_section_header.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/homes_transfer_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/meet_and_greet_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // ── Mock Data ────────────────────────────────────────────────────
@@ -102,30 +105,30 @@ class _HomePageState extends State<HomePage> {
 
   // ── Bottom Nav Items ─────────────────────────────────────────────
 
-  final List<Map<String, dynamic>> _navItems = [
-    {'icon': Iconsax.home, 'activeIcon': Iconsax.home5, 'label': 'Home'},
-    {
-      'icon': Iconsax.category,
-      'activeIcon': Iconsax.category5,
-      'label': 'Services',
-    },
-    {
-      'icon': Iconsax.ticket_2,
-      'activeIcon': Iconsax.ticket_25,
-      'label': 'Bookings',
-    },
-    {
-      'icon': Iconsax.profile_circle,
-      'activeIcon': Iconsax.profile_circle5,
-      'label': 'Profile',
-    },
-  ];
+  // final List<Map<String, dynamic>> _navItems = [
+  //   {'icon': Iconsax.home, 'activeIcon': Iconsax.home5, 'label': 'Home'},
+  //   {
+  //     'icon': Iconsax.category,
+  //     'activeIcon': Iconsax.category5,
+  //     'label': 'Services',
+  //   },
+  //   {
+  //     'icon': Iconsax.ticket_2,
+  //     'activeIcon': Iconsax.ticket_25,
+  //     'label': 'Bookings',
+  //   },
+  //   {
+  //     'icon': Iconsax.profile_circle,
+  //     'activeIcon': Iconsax.profile_circle5,
+  //     'label': 'Profile',
+  //   },
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: AppColors.background,
-      // drawer: _buildDrawer(),
+      drawer: _buildDrawer(),
       // extendBody: true, //
       body: SafeArea(
         bottom: false,
@@ -137,7 +140,7 @@ class _HomePageState extends State<HomePage> {
               child: HomeAppBar(
                 onMenuTap: () {
                   // open drawer
-                  // scaffoldKey.currentState?.openDrawer();
+                  _scaffoldKey.currentState?.openDrawer();
                 },
                 onProfileTap: () {
                   // navigate to profile
@@ -149,6 +152,10 @@ class _HomePageState extends State<HomePage> {
 
             // ── Search Bar ───────────────────────────────────────
             SliverToBoxAdapter(child: HomeSearchBar()),
+            SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
+
+
+            SliverToBoxAdapter(child: MeetAndGreetCard(onBookTap: () {})),
 
             // ── Section: Our Services ────────────────────────
             SliverToBoxAdapter(
@@ -159,16 +166,22 @@ class _HomePageState extends State<HomePage> {
 
             // ── Section: Featured Tours & Packages ────────────────────────
             SliverToBoxAdapter(
-              child: HomeSectionHeader(title: 'Featured Tours & Packages', onSeeAll: () {}),
+              child: HomeSectionHeader(
+                title: 'Featured Tours & Packages',
+                onSeeAll: () {},
+              ),
             ),
 
-                        SliverToBoxAdapter(child: _buildTransfers()),
+            SliverToBoxAdapter(child: _buildTransfers()),
+
+            SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
 
             // ── Section: Meet & Greet ─────────────────────────────
-            
-            // SliverToBoxAdapter(child: MeetAndGreetCard()),
+            // SliverToBoxAdapter(child: MeetAndGreetCard(onBookTap: () {})),
 
-
+            SliverToBoxAdapter(
+  child: HomeNeedHelp(),
+),
 
             // bottom padding so content doesn't hide behind floating nav
             SliverToBoxAdapter(child: SizedBox(height: 110.h)),
@@ -179,125 +192,123 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // ── Featured Packages (horizontal scroll) ────────────────────────
 
-// ── Featured Packages (horizontal scroll) ────────────────────────
+  Widget _buildFeaturedPackages() {
+    return SizedBox(
+      height: 160.h,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
+        itemCount: _featuredPackages.length,
+        separatorBuilder: (_, __) => SizedBox(width: 12.w),
+        itemBuilder: (context, index) {
+          final item = _featuredPackages[index];
+          return FeaturedPackageCard(item: item);
+        },
+      ),
+    );
+  }
 
-Widget _buildFeaturedPackages() {
-  return SizedBox(
-    height: 160.h,
-    child: ListView.separated(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-      itemCount: _featuredPackages.length,
-      separatorBuilder: (_, __) => SizedBox(width: 12.w),
-      itemBuilder: (context, index) {
-        final item = _featuredPackages[index];
-        return _FeaturedPackageCard(item: item);
-      },
+  // ── Transfers (horizontal scroll) ────────────────────────────────
+
+  Widget _buildTransfers() {
+    return SizedBox(
+      height: 160.h,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
+        itemCount: _transfers.length,
+        separatorBuilder: (_, __) => SizedBox(width: 12.w),
+        itemBuilder: (context, index) {
+          final item = _transfers[index];
+          return TransferCard(item: item);
+        },
+      ),
+    );
+  }
+}
+// ── Drawer ───────────────────────────────────────────────────────
+
+Widget _buildDrawer() {
+  return Drawer(
+    backgroundColor: AppColors.surface,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(24.r),
+        bottomRight: Radius.circular(24.r),
+      ),
+    ),
+    child: SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(AppSpacing.lg),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [AppColors.primary, AppColors.accent],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 60.w,
+                  height: 60.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.accent, width: 2),
+                    gradient:  LinearGradient(
+                      colors: [AppColors.accent, AppColors.primary],
+                    ),
+                  ),
+                  child: Icon(Iconsax.user, color: Colors.white, size: 28.sp),
+                ),
+                SizedBox(height: AppSpacing.sm),
+                Text(
+                  'Thilshan Mohamed',
+                  style: AppTextStyles.heading3.copyWith(color: Colors.white),
+                ),
+                Text(
+                  'thilshan@gmail.com',
+                  style: AppTextStyles.bodySmall.copyWith(
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: AppSpacing.md),
+
+          // Menu Items
+          _drawerItem(Iconsax.home, 'Home', onTap: () {}),
+          _drawerItem(Iconsax.ticket_2, 'My Bookings', onTap: () {}),
+          _drawerItem(Iconsax.heart, 'Favourites', onTap: () {}),
+          _drawerItem(Iconsax.notification, 'Notifications', onTap: () {}),
+          _drawerItem(Iconsax.setting_2, 'Settings', onTap: () {}),
+          _drawerItem(Iconsax.info_circle, 'About Us', onTap: () {}),
+
+          const Spacer(),
+          const Divider(),
+
+          _drawerItem(
+            Iconsax.logout,
+            'Logout',
+            color: AppColors.error,
+            onTap: () {},
+          ),
+          SizedBox(height: AppSpacing.md),
+        ],
+      ),
     ),
   );
 }
-
-// ── Transfers (horizontal scroll) ────────────────────────────────
-
-Widget _buildTransfers() {
-  return SizedBox(
-    height: 160.h,
-    child: ListView.separated(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-      itemCount: _transfers.length,
-      separatorBuilder: (_, __) => SizedBox(width: 12.w),
-      itemBuilder: (context, index) {
-        final item = _transfers[index];
-        return _TransferCard(item: item);
-      },
-    ),
-  );
-}
-
-}
-// // ── Drawer ───────────────────────────────────────────────────────
-
-// Widget _buildDrawer() {
-//   return Drawer(
-//     backgroundColor: AppColors.surface,
-//     shape: RoundedRectangleBorder(
-//       borderRadius: BorderRadius.only(
-//         topRight: Radius.circular(24.r),
-//         bottomRight: Radius.circular(24.r),
-//       ),
-//     ),
-//     child: SafeArea(
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           // Header
-//           Container(
-//             width: double.infinity,
-//             padding: EdgeInsets.all(AppSpacing.lg),
-//             decoration: const BoxDecoration(
-//               gradient: LinearGradient(
-//                 colors: [AppColors.primary, AppColors.accent],
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//               ),
-//             ),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Container(
-//                   width: 60.w,
-//                   height: 60.w,
-//                   decoration: BoxDecoration(
-//                     shape: BoxShape.circle,
-//                     border: Border.all(color: AppColors.accent, width: 2),
-//                     gradient:  LinearGradient(
-//                       colors: [AppColors.accent, AppColors.primary],
-//                     ),
-//                   ),
-//                   child: Icon(Iconsax.user, color: Colors.white, size: 28.sp),
-//                 ),
-//                 SizedBox(height: AppSpacing.sm),
-//                 Text(
-//                   'Ahmed Al-Rashid',
-//                   style: AppTextStyles.heading3.copyWith(color: Colors.white),
-//                 ),
-//                 Text(
-//                   'ahmed@example.com',
-//                   style: AppTextStyles.bodySmall.copyWith(
-//                     color: Colors.white.withOpacity(0.7),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-
-//           SizedBox(height: AppSpacing.md),
-
-//           // Menu Items
-//           _drawerItem(Iconsax.home, 'Home', onTap: () {}),
-//           _drawerItem(Iconsax.ticket_2, 'My Bookings', onTap: () {}),
-//           _drawerItem(Iconsax.heart, 'Favourites', onTap: () {}),
-//           _drawerItem(Iconsax.notification, 'Notifications', onTap: () {}),
-//           _drawerItem(Iconsax.setting_2, 'Settings', onTap: () {}),
-//           _drawerItem(Iconsax.info_circle, 'About Us', onTap: () {}),
-
-//           const Spacer(),
-//           const Divider(),
-
-//           _drawerItem(
-//             Iconsax.logout,
-//             'Logout',
-//             color: AppColors.error,
-//             onTap: () {},
-//           ),
-//           SizedBox(height: AppSpacing.md),
-//         ],
-//       ),
-//     ),
-//   );
-// }
 
 Widget _drawerItem(
   IconData icon,
@@ -325,268 +336,3 @@ Widget _drawerItem(
   );
 }
 
-// ── Package Card ─────────────────────────────────────────────────────────────
-
-class _FeaturedPackageCard extends StatelessWidget {
-  final Map<String, dynamic> item;
-
-  const _FeaturedPackageCard({required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 200.w,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.r),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // Image
-              Image.network(
-                item['image'],
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
-                  color: AppColors.primary.withOpacity(0.2),
-                  child: Icon(
-                    Iconsax.image,
-                    color: AppColors.primary,
-                    size: 40.sp,
-                  ),
-                ),
-              ),
-
-              // Gradient overlay
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.75),
-                    ],
-                    stops: const [0.4, 1.0],
-                  ),
-                ),
-              ),
-
-              // Tag top left
-              // Positioned(
-              //   top: 12.h,
-              //   left: 12.w,
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(
-              //       horizontal: 10.w,
-              //       vertical: 4.h,
-              //     ),
-              //     decoration: BoxDecoration(
-              //       color: Color(item['tagColor']),
-              //       borderRadius: BorderRadius.circular(8.r),
-              //     ),
-              //     child: Text(
-              //       item['tag'],
-              //       style: AppTextStyles.caption.copyWith(
-              //         color: Colors.white,
-              //         fontWeight: FontWeight.w700,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              // Rating top right
-              // Positioned(
-              //   top: 12.h,
-              //   right: 12.w,
-              //   child: Container(
-              //     padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(8.r),
-              //     ),
-              //     child: Row(
-              //       mainAxisSize: MainAxisSize.min,
-              //       children: [
-              //         Icon(
-              //           Icons.star_rounded,
-              //           size: 12.sp,
-              //           color: AppColors.accent,
-              //         ),
-              //         SizedBox(width: 2.w),
-              //         Text(
-              //           item['rating'],
-              //           style: AppTextStyles.caption.copyWith(
-              //             fontWeight: FontWeight.w700,
-              //             color: AppColors.textPrimary,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-
-              // Bottom info
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding: EdgeInsets.all(12.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item['title'],
-                        style: AppTextStyles.labelLarge.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 2.h),
-                      Text(
-                        item['subtitle'],
-                        style: AppTextStyles.caption.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
-                      ),
-                      // SizedBox(height: 6.h),
-                      // Text(
-                      //   item['price'],
-                      //   style: AppTextStyles.bodyLarge.copyWith(
-                      //     color: AppColors.accent,
-                      //     fontWeight: FontWeight.w700,
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ── Transfer Card ─────────────────────────────────────────────────────────────
-
-class _TransferCard extends StatelessWidget {
-  final Map<String, dynamic> item;
-
-  const _TransferCard({required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 240.w,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.07),
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            // Image
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.r),
-                bottomLeft: Radius.circular(16.r),
-              ),
-              child: SizedBox(
-                width: 90.w,
-                height: double.infinity,
-                child: Image.network(
-                  item['image'],
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    color: AppColors.primary.withOpacity(0.1),
-                    child: Icon(
-                      Iconsax.car,
-                      color: AppColors.primary,
-                      size: 30.sp,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            // Info
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(12.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      item['title'],
-                      style: AppTextStyles.labelLarge,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 4.h),
-                    Text(
-                      item['subtitle'],
-                      style: AppTextStyles.caption,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 8.h),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 3.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(6.r),
-                          ),
-                          child: Text(
-                            item['vehicle'],
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          item['price'],
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.accent,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

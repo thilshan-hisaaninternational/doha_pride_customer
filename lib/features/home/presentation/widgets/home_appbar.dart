@@ -59,23 +59,23 @@ class HomeAppBar extends StatelessWidget {
           const Spacer(),
 
           // Greeting + Name
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                greeting,
-                style: AppTextStyles.caption.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
-              Text(
-                userName,
-                style: AppTextStyles.labelMedium.copyWith(
-                  color: AppColors.textPrimary,
-                ),
-              ),
-            ],
-          ),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.end,
+          //   children: [
+          //     Text(
+          //       greeting,
+          //       style: AppTextStyles.caption.copyWith(
+          //         color: AppColors.textSecondary,
+          //       ),
+          //     ),
+          //     Text(
+          //       userName,
+          //       style: AppTextStyles.labelMedium.copyWith(
+          //         color: AppColors.textPrimary,
+          //       ),
+          //     ),
+          //   ],
+          // ),
 
           SizedBox(width: AppSpacing.sm),
 
@@ -86,16 +86,16 @@ class HomeAppBar extends StatelessWidget {
               width: 42.w,
               height: 42.w,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.primary,
-                  width: 2,
-                ),
+                // shape: BoxShape.circle,
+                // border: Border.all(
+                //   // color: AppColors.primary,
+                //   width: 2,
+                // ),
               ),
               child: Icon(
-                Icons.person,
-                size: AppIconSizes.sm,
-                color: AppColors.primary,
+                Icons.notifications_none, // safer fallback than Iconsax
+                size: AppIconSizes.md,
+                // color: AppColors.primary,
               ),
             ),
           ),
