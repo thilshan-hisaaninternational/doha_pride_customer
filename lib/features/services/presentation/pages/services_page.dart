@@ -2,9 +2,12 @@
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_secondary_appbar.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/notification_bell.dart';
 import 'package:doha_pride_customer/features/services/presentation/widgets/services_wide_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ServicesTab extends StatefulWidget {
@@ -19,66 +22,49 @@ class _ServicesTabState extends State<ServicesTab> {
   String _searchQuery = '';
 
   final List<Map<String, dynamic>> _services = [
-        {
+    {
       'title': 'Transfers',
-      'description':
-          'Comfortable and reliable transfers from Hamad International Airport to your hotel or any destination in Qatar.',
-      'price': 'From QAR 150',
-      'duration': '30-60 Min',
+      'subtitle': 'Airport Pickup & Chauffeur Service',
       'icon': Iconsax.car,
       'image':
-          'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1556122071-e404eaedb77f?auto=format&fit=crop&w=800&q=80',
       'tag': 'Available 24/7',
       'tagColor': 0xFF10B981,
       'available': true,
     },
-    
-        {
-      'title': 'Tour',
-      'description':
-          'All-inclusive tour packages covering Qatar\'s top attractions. Desert safaris, cultural tours, and luxury experiences.',
-      'price': 'From QAR 450',
-      'duration': 'Full Day',
+    {
+      'title': 'Tours',
+      'subtitle': 'Desert Safaris & City Experiences',
       'icon': Iconsax.category,
       'image':
-          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1546412414-8035e1776c9a?auto=format&fit=crop&w=800&q=80',
       'tag': 'Best Value',
       'tagColor': 0xFFEF4444,
       'available': true,
     },
     {
       'title': 'Transit Tours',
-      'description':
-          'Make the most of your layover with our curated city tours. Explore Doha\'s highlights during your transit stop.',
-      'price': 'From QAR 300',
-      'duration': '3-6 Hours',
+      'subtitle': 'Layover City Tours in Doha',
       'icon': Iconsax.map_1,
       'image':
-          'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1578898887932-dce23a595ad4?auto=format&fit=crop&w=800&q=80',
       'tag': 'Layover Special',
       'tagColor': 0xFF1A3C6E,
       'available': true,
     },
     {
       'title': 'Meet & Greet',
-      'description':
-          'VIP airport welcome service. Our team meets you at the gate with a personalized sign and escorts you through the airport.',
-      'price': 'From QAR 250',
-      'duration': '1-2 Hours',
+      'subtitle': 'VIP Airport Assistance Service',
       'icon': Iconsax.airplane,
       'image':
-          'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
       'tag': 'Most Popular',
       'tagColor': 0xFFD4A843,
       'available': true,
     },
-    
     {
       'title': 'Hotels',
-      'description':
-          'Handpicked luxury and boutique hotels across Qatar. We partner with the finest properties to guarantee your comfort.',
-      'price': 'From QAR 500',
-      'duration': 'Per Night',
+      'subtitle': 'Luxury & Boutique Stays in Qatar',
       'icon': Iconsax.building_4,
       'image':
           'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
@@ -88,13 +74,67 @@ class _ServicesTabState extends State<ServicesTab> {
     },
   ];
 
+  List<Map<String, dynamic>> _getServiceItems(String serviceTitle) {
+  switch (serviceTitle) {
+    case 'Transfers':
+      return [
+        {
+          'title': 'Airport to Hotel Transfer',
+          'description': 'Private comfortable transfer from airport to hotel.',
+          'price': 'QAR 150',
+          'duration': '45 Min',
+          'image':
+              'https://images.unsplash.com/photo-1556122071-e404eaedb77f?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.car,
+        },
+        {
+          'title': 'City Chauffeur Service',
+          'description': 'Luxury chauffeur service across Doha.',
+          'price': 'QAR 300',
+          'duration': '2 Hours',
+          'image':
+              'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.car,
+        },
+      ];
+
+    case 'Tours':
+      return [
+        {
+          'title': 'Doha City Tour',
+          'description': 'Explore Souq Waqif, Katara & The Pearl.',
+          'price': 'QAR 450',
+          'duration': 'Full Day',
+          'image':
+              'https://images.unsplash.com/photo-1546412414-8035e1776c9a?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map,
+        },
+      ];
+
+    case 'Hotels':
+      return [
+        {
+          'title': '5-Star Luxury Hotel Stay',
+          'description': 'Premium luxury hotels in prime Doha locations.',
+          'price': 'From QAR 500',
+          'duration': 'Per Night',
+          'image':
+              'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.building_4,
+        },
+      ];
+
+    default:
+      return [];
+  }
+}
+
   List<Map<String, dynamic>> get _filtered {
     if (_searchQuery.isEmpty) return _services;
     return _services.where((s) {
-      return s['title']
-          .toString()
-          .toLowerCase()
-          .contains(_searchQuery.toLowerCase());
+      return s['title'].toString().toLowerCase().contains(
+        _searchQuery.toLowerCase(),
+      );
     }).toList();
   }
 
@@ -113,18 +153,17 @@ class _ServicesTabState extends State<ServicesTab> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             // ── AppBar ─────────────────────────────────────────────
-            _buildAppBar(),
+            SectionAppBar(
+              title: 'Our Services',
+              subtitle: 'What can we help you with?',
+              action: const NotificationBell(),
+            ),
+
 
             // ── Search Bar ─────────────────────────────────────────
             _buildSearchBar(),
-            // HomeSearchBar(
-            //   hintText: 'Search services...',
-            //   onTap: () {
-            //     // focus search input or navigate to dedicated search page
-            //   },
-            // ),
+
             SizedBox(height: AppSpacing.sm),
 
             // ── Results count ──────────────────────────────────────
@@ -159,7 +198,10 @@ class _ServicesTabState extends State<ServicesTab> {
                         return ServiceWideCard(
                           service: _filtered[index],
                           onTap: () {
-                            // context.push(AppRoutes.serviceDetail, extra: service)
+                            // print("Tapped on ${_filtered[index]['title']}");
+                              final service = _filtered[index];
+
+                              context.pushNamed('service-listing', extra: {'title': service['title'], 'items': _getServiceItems(service['title'])});
                           },
                         );
                       },
@@ -167,57 +209,6 @@ class _ServicesTabState extends State<ServicesTab> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  // ── AppBar ─────────────────────────────────────────────────────
-
-  Widget _buildAppBar() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        AppSpacing.screenPadding,
-        AppSpacing.md,
-        AppSpacing.screenPadding,
-        AppSpacing.sm,
-      ),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Our Services', style: AppTextStyles.heading1),
-              Text(
-                'What can we help you with?',
-                style: AppTextStyles.bodyMedium.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          // notification bell
-          Container(
-            width: 42.w,
-            height: 42.w,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(12.r),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.06),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Icon(
-              Iconsax.notification,
-              size: 20.sp,
-              color: AppColors.textPrimary,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -287,11 +278,7 @@ class _ServicesTabState extends State<ServicesTab> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Iconsax.search_normal,
-            size: 64.sp,
-            color: AppColors.textHint,
-          ),
+          Icon(Iconsax.search_normal, size: 64.sp, color: AppColors.textHint),
           SizedBox(height: AppSpacing.md),
           Text('No services found', style: AppTextStyles.heading3),
           SizedBox(height: AppSpacing.xs),

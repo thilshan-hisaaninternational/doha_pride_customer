@@ -4,6 +4,7 @@ import 'package:doha_pride_customer/features/my_bookings/presentation/pages/book
 import 'package:doha_pride_customer/features/home/presentation/pages/home_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_shell.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/profile_page.dart';
+import 'package:doha_pride_customer/features/services/presentation/pages/service_list_page.dart';
 import 'package:doha_pride_customer/features/services/presentation/pages/services_page.dart';
 import 'package:doha_pride_customer/features/splash/presentation/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';
@@ -51,6 +52,17 @@ class AppRouter {
                 path: AppRoutes.services,
                 builder: (context, state) => const ServicesTab(),
                 routes: [
+                  GoRoute(
+                    path: 'listing',
+                    name: 'service-listing',
+                    builder: (context, state) {
+                      final extra =state.extra as Map<String, dynamic>;
+                      return ServiceListingPage(
+                        title: extra['title'] as String,
+                        items: extra['items'] as List<Map<String, dynamic>>,
+                      );
+                    }
+                  )
                   // nested service routes go here later
                   // GoRoute(path: 'transfers', ...)
                   // GoRoute(path: 'meet-greet', ...)
