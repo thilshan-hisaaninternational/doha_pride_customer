@@ -93,6 +93,12 @@ class ServiceItemCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            item['duration'],
+                            style: AppTextStyles.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          Text(
                             item['price'],
                             style: AppTextStyles.heading3.copyWith(
                               color: AppColors.primary,
@@ -100,12 +106,7 @@ class ServiceItemCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 2.h),
-                          Text(
-                            item['duration'],
-                            style: AppTextStyles.bodySmall.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
+                          
                         ],
                       ),
                       Icon(
