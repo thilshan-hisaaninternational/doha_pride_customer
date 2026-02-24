@@ -5,6 +5,7 @@ import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_button.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_text_field.dart';
+import 'package:doha_pride_customer/features/auth/presentation/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,22 +23,27 @@ class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers
-  final _usernameController    = TextEditingController();
-  final _emailController       = TextEditingController();
-  final _phoneController       = TextEditingController();
-  final _passwordController    = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _confirmPassController = TextEditingController();
 
-    // Focus Nodes — so keyboard moves field to field smoothly
-  final _usernameFocus    = FocusNode();
-  final _emailFocus       = FocusNode();
-  final _phoneFocus       = FocusNode();
-  final _passwordFocus    = FocusNode();
+  // Focus Nodes — so keyboard moves field to field smoothly
+  final _usernameFocus = FocusNode();
+  final _emailFocus = FocusNode();
+  final _phoneFocus = FocusNode();
+  final _passwordFocus = FocusNode();
   final _confirmPassFocus = FocusNode();
 
-  bool _isLoading          = false;
-  bool _obscurePassword    = true;
+  bool _isLoading = false;
+  bool _obscurePassword = true;
   bool _obscureConfirmPass = true;
+  bool _googleLoading = false;
+  bool _appleLoading = false;
+
+  // prevents tapping another social button while one is loading
+  bool get _anySocialLoading => _googleLoading || _appleLoading;
 
   // ── Validators ───────────────────────────────────────────────────
 
@@ -58,8 +64,7 @@ class _SignupPageState extends State<SignupPage> {
     if (value == null || value.trim().isEmpty) {
       return 'Email is required';
     }
-    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-        .hasMatch(value.trim())) {
+    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
       return 'Please enter a valid email address';
     }
     return null;
@@ -91,7 +96,7 @@ class _SignupPageState extends State<SignupPage> {
     return null;
   }
 
-    String? _validateConfirmPassword(String? value) {
+  String? _validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
     }
@@ -118,7 +123,27 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
-    // ── Dispose ──────────────────────────────────────────────────────
+  Future<void> _googleSignIn() async {
+    if (_anySocialLoading) return;
+    setState(() => _googleLoading = true);
+    await Future.delayed(const Duration(seconds: 1));
+    if (mounted) {
+      setState(() => _googleLoading = false);
+      context.go(AppRoutes.home);
+    }
+  }
+
+  Future<void> _appleSignIn() async {
+    if (_anySocialLoading) return;
+    setState(() => _appleLoading = true);
+    await Future.delayed(const Duration(seconds: 1));
+    if (mounted) {
+      setState(() => _appleLoading = false);
+      context.go(AppRoutes.home);
+    }
+  }
+
+  // ── Dispose ──────────────────────────────────────────────────────
 
   @override
   void dispose() {
@@ -135,38 +160,37 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: AppColors.background,
-        appBar: AppBar(
-          backgroundColor: AppColors.background,
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () => context.pop(),
-            icon: Icon(
-              Iconsax.arrow_left,
-              color: AppColors.textPrimary,
-              size: AppIconSizes.md,
+        // appBar: AppBar(
+        //   backgroundColor: AppColors.background,
+        //   elevation: 0,
+        //   leading: IconButton(
+        //     onPressed: () => context.pop(),
+        //     icon: Icon(
+        //       Iconsax.arrow_left,
+        //       color: AppColors.textPrimary,
+        //       size: AppIconSizes.md,
+        //     ),
+        //   ),
+        // ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpacing.screenPadding,
+              vertical: AppSpacing.sm,
             ),
-          ),
-        ),
-        body: SafeArea(child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding, vertical: AppSpacing.sm),
-          child: Form(
-            key: _formKey,
-            child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-               // ── Header ───────────────────────────────────────
-                  Text(
-                    'Create Account',
-                    style: AppTextStyles.heading1,
-                  ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // ── Header ───────────────────────────────────────
+                  Text('Create Account', style: AppTextStyles.heading2),
                   SizedBox(height: AppSpacing.xs),
                   Text(
                     'Fill in your details to get started',
@@ -175,11 +199,14 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
 
-                  SizedBox(height: AppSpacing.lg),
+             
+
+
+                  SizedBox(height: AppSpacing.md),
 
                   // ── Username ─────────────────────────────────────
                   // Text('Username', style: AppTextStyles.labelMedium),
-                  SizedBox(height: AppSpacing.xs),
+                  // SizedBox(height: AppSpacing.xs),
                   AppTextField(
                     controller: _usernameController,
                     label: 'Enter your username',
@@ -201,11 +228,11 @@ class _SignupPageState extends State<SignupPage> {
                     validator: _validateUsername,
                   ),
 
-                      SizedBox(height: AppSpacing.md),
+                  SizedBox(height: AppSpacing.md),
 
                   // ── Email ────────────────────────────────────────
                   // Text('Email Address', style: AppTextStyles.labelMedium),
-                  SizedBox(height: AppSpacing.xs),
+                  // SizedBox(height: AppSpacing.xs),
                   AppTextField(
                     controller: _emailController,
                     label: 'Enter your email',
@@ -223,11 +250,11 @@ class _SignupPageState extends State<SignupPage> {
                     validator: _validateEmail,
                   ),
 
-                   SizedBox(height: AppSpacing.md),
+                  SizedBox(height: AppSpacing.md),
 
                   // ── Phone ────────────────────────────────────────
                   // Text('Phone Number', style: AppTextStyles.labelMedium),
-                  SizedBox(height: AppSpacing.xs),
+                  // SizedBox(height: AppSpacing.xs),
                   _PhoneField(
                     controller: _phoneController,
                     focusNode: _phoneFocus,
@@ -239,9 +266,9 @@ class _SignupPageState extends State<SignupPage> {
 
                   SizedBox(height: AppSpacing.md),
 
-               // ── Password ─────────────────────────────────────
+                  // ── Password ─────────────────────────────────────
                   // Text('Password', style: AppTextStyles.labelMedium),
-                  SizedBox(height: AppSpacing.xs),
+                  // SizedBox(height: AppSpacing.xs),
                   AppTextField(
                     controller: _passwordController,
                     label: 'Enter your password',
@@ -249,14 +276,13 @@ class _SignupPageState extends State<SignupPage> {
                     obscureText: _obscurePassword,
                     prefixIcon: Icon(
                       Iconsax.lock,
-                      size:AppIconSizes.sm,
+                      size: AppIconSizes.sm,
                       color: AppColors.textSecondary,
                     ),
                     suffixIcon: _PasswordToggle(
                       isObscure: _obscurePassword,
-                      onTap: () => setState(
-                        () => _obscurePassword = !_obscurePassword,
-                      ),
+                      onTap: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
                     ),
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
@@ -312,6 +338,16 @@ class _SignupPageState extends State<SignupPage> {
 
                   SizedBox(height: AppSpacing.lg),
 
+                       // ── 3. Social Buttons FIRST ──────────────────
+                    _buildSocialButtons(),
+
+                    SizedBox(height: AppSpacing.md),
+
+                    // // // ── 4. Divider ───────────────────────────────
+                    // _buildDivider(),
+
+                    // SizedBox(height: AppSpacing.lg),
+
                   // ── Terms ─────────────────────────────────────────
                   Center(
                     child: Text.rich(
@@ -341,7 +377,7 @@ class _SignupPageState extends State<SignupPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: AppSpacing.lg),
+                  SizedBox(height: AppSpacing.md),
 
                   // ── Login Link ────────────────────────────────────
                   Center(
@@ -368,18 +404,85 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
 
-
-                  SizedBox(height: AppSpacing.lg)
-
-
-            ],
-          ),),
-        )),
-
-      )
+                  SizedBox(height: AppSpacing.lg),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
+ // ── Social Buttons ────────────────────────────────────────────
+
+  Widget _buildSocialButtons() {
+    return Column(
+      children: [
+        // Google — full width on its own row
+        SocialLoginButton(
+          label: 'Continue with Google',
+          iconAsset: 'assets/icons/google.svg',
+          isLoading: _googleLoading,
+          onTap: _anySocialLoading ? () {} : _googleSignIn,
+        ),
+
+        SizedBox(height: AppSpacing.sm),
+
+        // Apple — full width on its own row
+        // only show on iOS
+        // if (Platform.isIOS)
+        // SocialLoginButton(
+        //   label: 'Continue with Apple',
+        //   iconAsset: 'assets/icons/apple.svg',
+        //   isLoading: _appleLoading,
+        //   onTap: _anySocialLoading ? () {} : _appleSignIn,
+        // ),
+      ],
+    );
+  }
+
+
+  // Widget _buildSocialButtons() {
+  // return Row(
+  //   mainAxisAlignment: MainAxisAlignment.center,
+  //   children: [
+  //     socialIconButton(
+  //       icon: 'assets/icons/google.svg',
+  //       onTap: _googleSignIn,
+  //       isLoading: _googleLoading,
+  //     ),
+  //     SizedBox(width: 16.w),
+  //     _socialIconButton(
+  //       icon: 'assets/icons/apple.svg',
+  //       onTap: _appleSignIn,
+  //       isLoading: _appleLoading,
+  //     ),
+  //   ],
+  // );
 }
+
+
+  // ── Divider ───────────────────────────────────────────────────
+
+  Widget _buildDivider() {
+    return Row(
+      children: [
+        const Expanded(child: Divider()),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+          child: Text(
+            'or sign in with account',
+            style: AppTextStyles.caption.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+        ),
+        const Expanded(child: Divider()),
+      ],
+    );
+  }
+
+
 
 
 // ── Private Widgets ──────────────────────────────────────────────────────────
@@ -389,10 +492,7 @@ class _PasswordToggle extends StatelessWidget {
   final bool isObscure;
   final VoidCallback onTap;
 
-  const _PasswordToggle({
-    required this.isObscure,
-    required this.onTap,
-  });
+  const _PasswordToggle({required this.isObscure, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -435,10 +535,10 @@ class _PhoneFieldState extends State<_PhoneField> {
     {'code': '+973', 'flag': '🇧🇭', 'name': 'Bahrain'},
     {'code': '+968', 'flag': '🇴🇲', 'name': 'Oman'},
     {'code': '+965', 'flag': '🇰🇼', 'name': 'Kuwait'},
-    {'code': '+91',  'flag': '🇮🇳', 'name': 'India'},
-    {'code': '+1',   'flag': '🇺🇸', 'name': 'USA'},
-    {'code': '+44',  'flag': '🇬🇧', 'name': 'UK'},
-    {'code': '+20',  'flag': '🇪🇬', 'name': 'Egypt'},
+    {'code': '+91', 'flag': '🇮🇳', 'name': 'India'},
+    {'code': '+1', 'flag': '🇺🇸', 'name': 'USA'},
+    {'code': '+44', 'flag': '🇬🇧', 'name': 'UK'},
+    {'code': '+20', 'flag': '🇪🇬', 'name': 'Egypt'},
   ];
 
   @override
