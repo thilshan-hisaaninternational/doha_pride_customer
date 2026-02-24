@@ -101,8 +101,6 @@ class _SigninPageState extends State<SigninPage> {
                   children: [
 
                     // ── Top flexible space ──────────────────────
-                    // const Spacer(),
-
                     SizedBox(height: AppSpacing.lg),
 
                     // ── Logo ──────────────────────────────────────────
@@ -139,7 +137,6 @@ class _SigninPageState extends State<SigninPage> {
 
                     Text(
                       'Sign in to your Doha Pride account',
-                      // style: TextStyle(fontSize: 16, color: Colors.grey),
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -164,11 +161,6 @@ class _SigninPageState extends State<SigninPage> {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email or username';
                         }
-                        // if (!RegExp(
-                        //   r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                        // ).hasMatch(value)) {
-                        //   return 'Please enter a valid email';
-                        // }
                         return null;
                       },
                     ),
@@ -244,22 +236,6 @@ class _SigninPageState extends State<SigninPage> {
 
                     // SizedBox(height: AppSpacing.lg),
                     const Spacer(), 
-
-                    // ── Divider ────────────────────────────────────────
-                    // Row(
-                    //   children: [
-                    //     const Expanded(child: Divider()),
-                    //     Padding(
-                    //       padding: EdgeInsets.symmetric(
-                    //         horizontal: AppSpacing.sm,
-                    //       ),
-                    //       child: Text('or', style: AppTextStyles.bodySmall),
-                    //     ),
-                    //     const Expanded(child: Divider()),
-                    //   ],
-                    // ),
-
-                    // SizedBox(height: AppSpacing.lg),
 
                     // ── Sign Up Link ───────────────────────────────────
                     Center(

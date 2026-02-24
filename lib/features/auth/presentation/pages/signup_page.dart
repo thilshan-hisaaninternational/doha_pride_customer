@@ -442,23 +442,7 @@ class _SignupPageState extends State<SignupPage> {
   }
 
 
-  // Widget _buildSocialButtons() {
-  // return Row(
-  //   mainAxisAlignment: MainAxisAlignment.center,
-  //   children: [
-  //     socialIconButton(
-  //       icon: 'assets/icons/google.svg',
-  //       onTap: _googleSignIn,
-  //       isLoading: _googleLoading,
-  //     ),
-  //     SizedBox(width: 16.w),
-  //     _socialIconButton(
-  //       icon: 'assets/icons/apple.svg',
-  //       onTap: _appleSignIn,
-  //       isLoading: _appleLoading,
-  //     ),
-  //   ],
-  // );
+  
 }
 
 
@@ -482,11 +466,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-
-
-
 // ── Private Widgets ──────────────────────────────────────────────────────────
-// kept private (underscore) because they're only used in this file
 
 class _PasswordToggle extends StatelessWidget {
   final bool isObscure;
