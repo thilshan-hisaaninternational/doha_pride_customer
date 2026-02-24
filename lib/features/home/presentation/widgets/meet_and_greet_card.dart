@@ -36,7 +36,7 @@ class MeetAndGreetCard extends StatelessWidget {
               height: 120.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.08),
+                color: Colors.white.withValues(alpha: .08),
               ),
             ),
           ),
@@ -48,7 +48,7 @@ class MeetAndGreetCard extends StatelessWidget {
               height: 100.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.06),
+                color: Colors.white.withValues(alpha: 0.06),
               ),
             ),
           ),
@@ -92,7 +92,7 @@ class MeetAndGreetCard extends StatelessWidget {
                       // Text(
                       //   'VIP arrival & departure assistance',
                       //   style: AppTextStyles.caption.copyWith(
-                      //     color: Colors.white.withOpacity(0.8),
+                      //     color: Colors.white.withValues(0.8),
                       //   ),
                       // ),
                     ],

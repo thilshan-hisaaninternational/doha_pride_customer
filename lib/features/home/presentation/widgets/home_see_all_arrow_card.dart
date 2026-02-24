@@ -1,7 +1,5 @@
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
-import 'package:doha_pride_customer/core/theme/app_spacing.dart';
-import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
@@ -22,11 +20,11 @@ class SeeAllArrowCard extends StatelessWidget {
           shape: BoxShape.circle, 
           color: Colors.white,
           border: Border.all(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha:  0.2),
           ),
             boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues(alpha: 0.08),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),

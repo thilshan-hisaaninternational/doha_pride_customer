@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
-class FeaturedPackageCard extends StatelessWidget {
+class FeaturedServicesCard extends StatelessWidget {
   final Map<String, dynamic> item;
   final VoidCallback? onTap;
 
-  const FeaturedPackageCard({
+  const FeaturedServicesCard({
     super.key,
     required this.item,
     this.onTap,
@@ -24,7 +24,7 @@ class FeaturedPackageCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -40,7 +40,7 @@ class FeaturedPackageCard extends StatelessWidget {
                 item['image'],
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
-                  color: AppColors.primary.withOpacity(0.2),
+                  color: AppColors.primary.withValues(alpha: 0.2),
                   child: Icon(
                     Iconsax.image,
                     color: AppColors.primary,
@@ -57,7 +57,7 @@ class FeaturedPackageCard extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.transparent,
-                      Colors.black.withOpacity(0.75),
+                      Colors.black.withValues(alpha: 0.75),
                     ],
                     stops: const [0.4, 1.0],
                   ),
@@ -84,7 +84,7 @@ class FeaturedPackageCard extends StatelessWidget {
                       Text(
                         item['subtitle'],
                         style: AppTextStyles.caption.copyWith(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                         ),
                       ),
                     ],

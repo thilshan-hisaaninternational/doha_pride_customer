@@ -25,21 +25,21 @@ class BookingCard extends StatelessWidget {
         return {
           'label': 'Upcoming',
           'color': AppColors.primary,
-          'bg': AppColors.primary.withOpacity(0.1),
+          'bg': AppColors.primary.withValues(alpha: 0.1),
           'icon': Iconsax.clock,
         };
       case 'completed':
         return {
           'label': 'Completed',
           'color': AppColors.success,
-          'bg': AppColors.success.withOpacity(0.1),
+          'bg': AppColors.success.withValues(alpha: 0.1),
           'icon': Iconsax.tick_circle,
         };
       case 'cancelled':
         return {
           'label': 'Cancelled',
           'color': AppColors.error,
-          'bg': AppColors.error.withOpacity(0.1),
+          'bg': AppColors.error.withValues(alpha: 0.1),
           'icon': Iconsax.close_circle,
         };
       default:
@@ -65,7 +65,7 @@ class BookingCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -85,7 +85,7 @@ class BookingCard extends StatelessWidget {
                     height: 46.w,
                     decoration: BoxDecoration(
                       color: Color(booking['iconColor'] as int)
-                          .withOpacity(0.12),
+                          .withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(14.r),
                     ),
                     child: Icon(
@@ -260,7 +260,7 @@ class BookingCard extends StatelessWidget {
                           vertical: 6.h,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.error.withOpacity(0.1),
+                          color: AppColors.error.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(

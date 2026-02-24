@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
-class TransferCard extends StatelessWidget {
+class FeaturedToursNPackagesCard extends StatelessWidget {
   final Map<String, dynamic> item;
   final VoidCallback? onTap;
 
-  const TransferCard({super.key, required this.item, this.onTap});
+  const FeaturedToursNPackagesCard({super.key, required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TransferCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.07),
+              color: Colors.black.withValues(alpha: 0.07),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -81,7 +81,7 @@ class TransferCard extends StatelessWidget {
                         vertical: 3.h,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6.r),
                       ),
                       child: Text(

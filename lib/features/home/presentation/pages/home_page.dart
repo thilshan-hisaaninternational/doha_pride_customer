@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   // ── Mock Data ────────────────────────────────────────────────────
 
-  final List<Map<String, dynamic>> _featuredPackages = [
+  final List<Map<String, dynamic>> _services = [
     {
       'title': 'Transfer',
       'subtitle': 'Full Day Experience',
@@ -63,33 +63,24 @@ class _HomePageState extends State<HomePage> {
       'price': 'QAR 350',
       'rating': '4.7',
       'image':
-          'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80',
       'tag': 'New',
       'tagColor': 0xFF10B981,
     },
+
     {
-      'title': 'Transfer',
+      'title': 'Hotel',
       'subtitle': 'Full Day Experience',
       'price': 'QAR 450',
       'rating': '4.9',
       'image':
-          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
-      'tag': 'Best Seller',
-      'tagColor': 0xFFD4A843,
-    },
-    {
-      'title': 'Transfer',
-      'subtitle': 'Full Day Experience',
-      'price': 'QAR 450',
-      'rating': '4.9',
-      'image':
-          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
       'tag': 'Best Seller',
       'tagColor': 0xFFD4A843,
     },
   ];
 
-  final List<Map<String, dynamic>> _transfers = [
+  final List<Map<String, dynamic>> _featured_tours_n_packages = [
     {
       'title': 'Airport Transfer',
       'subtitle': 'Hamad Intl → City Center',
@@ -114,7 +105,7 @@ class _HomePageState extends State<HomePage> {
       'image':
           'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400',
     },
-        {
+    {
       'title': 'Airport Transfer',
       'subtitle': 'Hamad Intl → City Center',
       'price': 'QAR 150',
@@ -140,18 +131,11 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-  final List<Map<String, dynamic>> _services = [
-    {'icon': Iconsax.airplane, 'label': 'Meet &\nGreet', 'color': 0xFF1A3C6E},
-    {'icon': Iconsax.car, 'label': 'Transfers', 'color': 0xFFD4A843},
-    {'icon': Iconsax.map_1, 'label': 'Transit\nTours', 'color': 0xFF10B981},
-    {'icon': Iconsax.category, 'label': 'Packages', 'color': 0xFFEF4444},
-    {'icon': Iconsax.building_4, 'label': 'Hotels', 'color': 0xFF8B5CF6},
-  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       key: _scaffoldKey,
       backgroundColor: AppColors.background,
       drawer: _buildDrawer(),
@@ -211,7 +195,7 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: HomeNeedHelp()),
 
             // bottom padding so content doesn't hide behind floating nav
-            SliverToBoxAdapter(child: SizedBox(height: 110.h)),
+            SliverToBoxAdapter(child: SizedBox(height: 40.h)),
           ],
         ),
       ),
@@ -227,19 +211,19 @@ class _HomePageState extends State<HomePage> {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-        itemCount: _featuredPackages.length > 5 ? 6 : _featuredPackages.length,
+        itemCount: _services.length > 5 ? 6 : _services.length,
         separatorBuilder: (_, __) => SizedBox(width: 12.w),
         itemBuilder: (context, index) {
           // If more than 5 services and index == 5 → show arrow
-          if (_featuredPackages.length > 5 && index == 5) {
+          if (_services.length > 5 && index == 5) {
             return SeeAllArrowCard(
               onTap: () {
-                // navigate to full packages list
+                // navigate to full services list
               },
             );
           }
-          final item = _featuredPackages[index];
-          return FeaturedPackageCard(item: item);
+          final item = _services[index];
+          return FeaturedServicesCard(item: item);
         },
       ),
     );
@@ -253,19 +237,19 @@ class _HomePageState extends State<HomePage> {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-        itemCount: _transfers.length > 5 ? 6 : _transfers.length,
+        itemCount: _featured_tours_n_packages.length > 5 ? 6 : _featured_tours_n_packages.length,
         separatorBuilder: (_, __) => SizedBox(width: 12.w),
         itemBuilder: (context, index) {
           // If more than 5 services and index == 5 → show arrow
-          if (_transfers.length > 5 && index == 5) {
+          if (_featured_tours_n_packages.length > 5 && index == 5) {
             return SeeAllArrowCard(
               onTap: () {
                 // navigate to full transfers list
               },
             );
           }
-          final item = _transfers[index];
-          return TransferCard(item: item);
+          final item = _featured_tours_n_packages[index];
+          return FeaturedToursNPackagesCard(item: item);
         },
       ),
     );
@@ -320,7 +304,7 @@ Widget _buildDrawer() {
                 Text(
                   'thilshan@gmail.com',
                   style: AppTextStyles.bodySmall.copyWith(
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withValues(alpha: 0.7),
                   ),
                 ),
               ],

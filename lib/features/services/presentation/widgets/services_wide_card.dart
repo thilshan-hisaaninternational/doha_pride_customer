@@ -27,7 +27,7 @@ class ServiceWideCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.07),
+              color: Colors.black.withValues(alpha:  0.07),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -52,7 +52,7 @@ class ServiceWideCard extends StatelessWidget {
                       service['image'],
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Container(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         child: Icon(
                           service['icon'] as IconData,
                           size: 48.sp,
@@ -77,7 +77,7 @@ class ServiceWideCard extends StatelessWidget {
                           end: Alignment.bottomCenter,
                           colors: [
                             Colors.transparent,
-                            Colors.black.withOpacity(0.3),
+                            Colors.black.withValues(alpha: 0.3),
                           ],
                           stops: const [0.5, 1.0],
                         ),
@@ -119,7 +119,7 @@ class ServiceWideCard extends StatelessWidget {
                       vertical: 5.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.55),
+                      color: Colors.black.withValues(alpha: 0.55),
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Row(
@@ -159,7 +159,7 @@ class ServiceWideCard extends StatelessWidget {
                         width: 36.w,
                         height: 36.w,
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.1),
+                          color: AppColors.primary.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Icon(
@@ -200,52 +200,52 @@ class ServiceWideCard extends StatelessWidget {
                   SizedBox(height: AppSpacing.md),
 
                   // price + book button
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Starting from',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                          Text(
-                            service['price'],
-                            style: AppTextStyles.bodyLarge.copyWith(
-                              color: AppColors.accent,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
+                  // Row(
+                  //   children: [
+                  //     Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: [
+                  //         Text(
+                  //           'Starting from',
+                  //           style: AppTextStyles.caption.copyWith(
+                  //             color: AppColors.textSecondary,
+                  //           ),
+                  //         ),
+                  //         Text(
+                  //           service['price'],
+                  //           style: AppTextStyles.bodyLarge.copyWith(
+                  //             color: AppColors.accent,
+                  //             fontWeight: FontWeight.w700,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
 
-                      const Spacer(),
+                  //     const Spacer(),
 
-                      // Book Now button
-                      GestureDetector(
-                        onTap: onTap,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 10.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Text(
-                            'Book Now',
-                            style: AppTextStyles.bodySmall.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  //     // Book Now button
+                  //     GestureDetector(
+                  //       onTap: onTap,
+                  //       child: Container(
+                  //         padding: EdgeInsets.symmetric(
+                  //           horizontal: 20.w,
+                  //           vertical: 10.h,
+                  //         ),
+                  //         decoration: BoxDecoration(
+                  //           color: AppColors.primary,
+                  //           borderRadius: BorderRadius.circular(12.r),
+                  //         ),
+                  //         child: Text(
+                  //           'Book Now',
+                  //           style: AppTextStyles.bodySmall.copyWith(
+                  //             color: Colors.white,
+                  //             fontWeight: FontWeight.w700,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

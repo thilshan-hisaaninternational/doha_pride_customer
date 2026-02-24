@@ -2,8 +2,7 @@
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
-import 'package:doha_pride_customer/features/home/presentation/widgets/home_search_bar.dart';
-import 'package:doha_pride_customer/features/home/presentation/widgets/services_wide_card.dart';
+import 'package:doha_pride_customer/features/services/presentation/widgets/services_wide_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
@@ -20,21 +19,8 @@ class _ServicesTabState extends State<ServicesTab> {
   String _searchQuery = '';
 
   final List<Map<String, dynamic>> _services = [
-    {
-      'title': 'Meet & Greet',
-      'description':
-          'VIP airport welcome service. Our team meets you at the gate with a personalized sign and escorts you through the airport.',
-      'price': 'From QAR 250',
-      'duration': '1-2 Hours',
-      'icon': Iconsax.airplane,
-      'image':
-          'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
-      'tag': 'Most Popular',
-      'tagColor': 0xFFD4A843,
-      'available': true,
-    },
-    {
-      'title': 'Airport Transfers',
+        {
+      'title': 'Transfers',
       'description':
           'Comfortable and reliable transfers from Hamad International Airport to your hotel or any destination in Qatar.',
       'price': 'From QAR 150',
@@ -44,6 +30,20 @@ class _ServicesTabState extends State<ServicesTab> {
           'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80',
       'tag': 'Available 24/7',
       'tagColor': 0xFF10B981,
+      'available': true,
+    },
+    
+        {
+      'title': 'Tour',
+      'description':
+          'All-inclusive tour packages covering Qatar\'s top attractions. Desert safaris, cultural tours, and luxury experiences.',
+      'price': 'From QAR 450',
+      'duration': 'Full Day',
+      'icon': Iconsax.category,
+      'image':
+          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
+      'tag': 'Best Value',
+      'tagColor': 0xFFEF4444,
       'available': true,
     },
     {
@@ -60,20 +60,21 @@ class _ServicesTabState extends State<ServicesTab> {
       'available': true,
     },
     {
-      'title': 'Trip Packages',
+      'title': 'Meet & Greet',
       'description':
-          'All-inclusive tour packages covering Qatar\'s top attractions. Desert safaris, cultural tours, and luxury experiences.',
-      'price': 'From QAR 450',
-      'duration': 'Full Day',
-      'icon': Iconsax.category,
+          'VIP airport welcome service. Our team meets you at the gate with a personalized sign and escorts you through the airport.',
+      'price': 'From QAR 250',
+      'duration': '1-2 Hours',
+      'icon': Iconsax.airplane,
       'image':
-          'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
-      'tag': 'Best Value',
-      'tagColor': 0xFFEF4444,
+          'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
+      'tag': 'Most Popular',
+      'tagColor': 0xFFD4A843,
       'available': true,
     },
+    
     {
-      'title': 'Hotel Booking',
+      'title': 'Hotels',
       'description':
           'Handpicked luxury and boutique hotels across Qatar. We partner with the finest properties to guarantee your comfort.',
       'price': 'From QAR 500',
@@ -204,7 +205,7 @@ class _ServicesTabState extends State<ServicesTab> {
               borderRadius: BorderRadius.circular(12.r),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
+                  color: Colors.black.withValues(alpha: 0.06),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),

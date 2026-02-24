@@ -94,12 +94,12 @@ class _BookingsTabState extends State<BookingsTab> {
   }
 
   // summary counts for the stat cards
-  int get _upcomingCount =>
-      _bookings.where((b) => b['status'] == 'upcoming').length;
-  int get _completedCount =>
-      _bookings.where((b) => b['status'] == 'completed').length;
-  int get _cancelledCount =>
-      _bookings.where((b) => b['status'] == 'cancelled').length;
+  // int get _upcomingCount =>
+  //     _bookings.where((b) => b['status'] == 'upcoming').length;
+  // int get _completedCount =>
+  //     _bookings.where((b) => b['status'] == 'completed').length;
+  // int get _cancelledCount =>
+  //     _bookings.where((b) => b['status'] == 'cancelled').length;
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +189,7 @@ class _BookingsTabState extends State<BookingsTab> {
               borderRadius: BorderRadius.circular(12.r),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
+                  color: Colors.black.withValues(alpha: 0.06),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),

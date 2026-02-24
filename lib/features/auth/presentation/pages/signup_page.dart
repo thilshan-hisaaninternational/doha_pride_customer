@@ -572,7 +572,7 @@ class _PhoneFieldState extends State<_PhoneField> {
                     ),
                   ),
                   selected: isSelected,
-                  selectedTileColor: AppColors.primary.withOpacity(0.05),
+                  selectedTileColor: AppColors.primary.withValues(alpha: 0.05),
                   onTap: () {
                     setState(() => _countryCode = country['code']!);
                     Navigator.pop(context);

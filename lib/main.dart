@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/dependency_injection.dart' as di ;
 
-void main() async {
+void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
   await di.initDependencies();
   runApp(const DohaprideApp());

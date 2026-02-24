@@ -98,7 +98,7 @@ class AppTextField extends StatelessWidget {
         focusedBorder: _border(AppColors.primary, width: 2),
         errorBorder: _border(AppColors.error),
         focusedErrorBorder: _border(AppColors.error, width: 2),
-        disabledBorder: _border(AppColors.divider.withOpacity(0.5)),
+        disabledBorder: _border(AppColors.divider.withValues(alpha: 0.5)),
 
         // ── Error Style ───────────────────────────────────────────
         errorStyle: AppTextStyles.caption.copyWith(
