@@ -4,7 +4,7 @@ import 'package:doha_pride_customer/features/my_bookings/presentation/pages/book
 import 'package:doha_pride_customer/features/home/presentation/pages/home_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_shell.dart';
 import 'package:doha_pride_customer/features/profile/presentation/pages/profile_page.dart';
-import 'package:doha_pride_customer/features/services/presentation/pages/service_list_page.dart';
+import 'package:doha_pride_customer/features/transfers/presentation/pages/transfer_page.dart';
 import 'package:doha_pride_customer/features/services/presentation/pages/services_page.dart';
 import 'package:doha_pride_customer/features/splash/presentation/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';

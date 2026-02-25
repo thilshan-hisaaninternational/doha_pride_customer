@@ -1,4 +1,3 @@
-// features/bookings/presentation/widgets/booking_card.dart
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
@@ -73,7 +72,6 @@ class BookingCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-
             // ── Card Header ────────────────────────────────────
             Padding(
               padding: EdgeInsets.all(16.w),
@@ -84,8 +82,9 @@ class BookingCard extends StatelessWidget {
                     width: 46.w,
                     height: 46.w,
                     decoration: BoxDecoration(
-                      color: Color(booking['iconColor'] as int)
-                          .withValues(alpha: 0.12),
+                      color: Color(
+                        booking['iconColor'] as int,
+                      ).withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(14.r),
                     ),
                     child: Icon(
@@ -206,10 +205,7 @@ class BookingCard extends StatelessWidget {
 
             // ── Card Footer ────────────────────────────────────
             Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 12.h,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               decoration: BoxDecoration(
                 color: AppColors.background,
                 borderRadius: BorderRadius.only(
@@ -339,8 +335,8 @@ class _DashedDivider extends StatelessWidget {
         builder: (context, constraints) {
           const dashWidth = 6.0;
           const dashSpace = 4.0;
-          final count =
-              (constraints.maxWidth / (dashWidth + dashSpace)).floor();
+          final count = (constraints.maxWidth / (dashWidth + dashSpace))
+              .floor();
           return Row(
             children: List.generate(count, (_) {
               return Padding(
