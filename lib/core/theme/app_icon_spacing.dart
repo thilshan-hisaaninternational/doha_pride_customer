@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppIconSizes {
   AppIconSizes._();
 
+  static double get xxs   => 14.sp;  // tiny inline icons
   static double get xs   => 16.sp;  // tiny inline icons
   static double get sm   => 20.sp;  // form field prefix icons
   static double get md   => 24.sp;  // standard icons, nav bar

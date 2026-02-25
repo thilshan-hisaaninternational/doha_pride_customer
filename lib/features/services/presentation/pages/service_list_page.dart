@@ -1,5 +1,5 @@
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
-import 'package:doha_pride_customer/features/services/presentation/widgets/service_list_card.dart';
+import 'package:doha_pride_customer/features/services/presentation/widgets/service_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

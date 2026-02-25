@@ -13,6 +13,9 @@ class ServiceItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ Structured badges, safe default
+    final List<dynamic> badges = (item['badges'] as List<dynamic>?) ?? [];
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -38,8 +41,9 @@ class ServiceItemCard extends StatelessWidget {
                 clipBehavior: Clip.none,
                 children: [
                   ClipRRect(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(16.r)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(16.r),
+                    ),
                     child: Stack(
                       children: [
                         Image.network(
@@ -80,17 +84,17 @@ class ServiceItemCard extends StatelessWidget {
                     ),
                   ),
 
-                  // 🔖 Badge half on image, half below
-                  if (item['badge'] != null)
+                  // 🔖 Badge (0–2 segments) half on image, half below
+                  if (badges.isNotEmpty)
                     Positioned(
-                      bottom: 6.h, // negative => hangs outside the image
+                      bottom: 6.h,
                       left: 0,
                       right: 0,
                       child: Center(
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 80.w,
-                            vertical: 6.h,
+                            horizontal: 60.w,
+                            vertical: 8.h,
                           ),
                           decoration: BoxDecoration(
                             color: item['badgeColor'] != null
@@ -98,12 +102,19 @@ class ServiceItemCard extends StatelessWidget {
                                 : AppColors.secondary,
                             borderRadius: BorderRadius.circular(20.r),
                           ),
-                          child: Text(
-                            item['badge'],
-                            style: AppTextStyles.bodySmall.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              _BadgeSegment(
+                                badge: badges[0] as Map<String, dynamic>,
+                              ),
+                              if (badges.length > 1) ...[
+                                SizedBox(width: 12.w),
+                                _BadgeSegment(
+                                  badge: badges[1] as Map<String, dynamic>,
+                                ),
+                              ],
+                            ],
                           ),
                         ),
                       ),
@@ -167,6 +178,39 @@ class ServiceItemCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _BadgeSegment extends StatelessWidget {
+  final Map<String, dynamic> badge;
+
+  const _BadgeSegment({required this.badge});
+
+  @override
+  Widget build(BuildContext context) {
+    final IconData? icon = badge['icon'] as IconData?;
+    final String label = (badge['label'] ?? '') as String;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (icon != null) ...[
+          Icon(
+            icon,
+            size: 14.sp,
+            color: Colors.white,
+          ),
+          SizedBox(width: 4.w),
+        ],
+        Text(
+          label,
+          style: AppTextStyles.bodySmall.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     );
   }
 }
