@@ -18,7 +18,7 @@ class AppBottomNav extends StatelessWidget {
   static const List<_NavItem> _items = [
     _NavItem(icon: Iconsax.home,           activeIcon: Iconsax.home5,            label: 'Home'),
     _NavItem(icon: Iconsax.category,       activeIcon: Iconsax.category5,        label: 'Services'),
-    _NavItem(icon: Iconsax.document_text,       activeIcon: Iconsax.receipt_2,        label: 'Bookings'),
+    _NavItem(icon: Iconsax.document_text,       activeIcon: Iconsax.receipt_2,   label: 'Bookings'),
     _NavItem(icon: Iconsax.profile_circle, activeIcon: Iconsax.profile_circle5,  label: 'Profile'),
   ];
 
