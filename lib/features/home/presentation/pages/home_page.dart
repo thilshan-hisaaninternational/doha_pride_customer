@@ -1,7 +1,9 @@
+import 'package:doha_pride_customer/core/router/app_router.dart';
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_appbar.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_banner_carousel.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_need_help.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_package_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_search_bar.dart';
@@ -9,8 +11,10 @@ import 'package:doha_pride_customer/features/home/presentation/widgets/home_sect
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_see_all_arrow_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/homes_transfer_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/meet_and_greet_card.dart';
+import 'package:doha_pride_customer/features/services/data/datasources/services_mock_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomePage extends StatefulWidget {
@@ -131,8 +135,6 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,17 +149,35 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             // ── App Bar ─────────────────────────────────────────
             // SliverToBoxAdapter(child: _buildAppBar()),
-            SliverToBoxAdapter(
-              child: HomeAppBar(
-                onMenuTap: () {
-                  // open drawer
-                  _scaffoldKey.currentState?.openDrawer();
-                },
-                onProfileTap: () {
-                  // navigate to profile
-                },
-                userName: 'Thilshan Mohamed',
-                greeting: 'Good Morning 👋',
+            // SliverToBoxAdapter(
+            //   child: HomeAppBar(
+            //     onMenuTap: () {
+            //       // open drawer
+            //       _scaffoldKey.currentState?.openDrawer();
+            //     },
+            //     onProfileTap: () {
+            //       // navigate to profile
+            //     },
+            //     userName: 'Thilshan Mohamed',
+            //     greeting: 'Good Morning 👋',
+            //   ),
+            // ),
+            SliverAppBar(
+              pinned: true,
+              backgroundColor: AppColors.background,
+              elevation: 0,
+              toolbarHeight: 60.h, // adjust to match your HomeAppBar height
+              automaticallyImplyLeading: false,
+              flexibleSpace: SafeArea(
+                bottom: false,
+                child: HomeAppBar(
+                  onMenuTap: () {
+                    _scaffoldKey.currentState?.openDrawer();
+                  },
+                  onProfileTap: () {},
+                  userName: 'Thilshan Mohamed',
+                  greeting: 'Good Morning 👋',
+                ),
               ),
             ),
 
@@ -165,11 +185,22 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: HomeSearchBar()),
             SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
 
-            SliverToBoxAdapter(child: MeetAndGreetCard(onBookTap: () {})),
+            // SliverToBoxAdapter(child: MeetAndGreetCard(onBookTap: () {})),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSpacing.screenPadding,
+                  // vertical: AppSpacing.md,
+                ),
+                child: HomeBannerCarousel(),
+              ),
+            ),
 
             // ── Section: Our Services ────────────────────────
             SliverToBoxAdapter(
-              child: HomeSectionHeader(title: 'Our Services', onSeeAll: () {}),
+              child: HomeSectionHeader(title: 'Our Services', onSeeAll: () {
+                context.go(AppRoutes.services);
+              }),
             ),
 
             SliverToBoxAdapter(child: _buildFeaturedPackages()),
@@ -195,7 +226,7 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: HomeNeedHelp()),
 
             // bottom padding so content doesn't hide behind floating nav
-            SliverToBoxAdapter(child: SizedBox(height: 40.h)),
+            SliverToBoxAdapter(child: SizedBox(height: AppSpacing.bottomPadding)),
           ],
         ),
       ),
@@ -223,7 +254,42 @@ class _HomePageState extends State<HomePage> {
             );
           }
           final item = _services[index];
-          return FeaturedServicesCard(item: item);
+          return FeaturedServicesCard(
+            item: item,
+            onTap: () {
+              final homeTitle = item['title'] as String;
+
+              // Map home titles -> services titles
+              String servicesTitle;
+              switch (homeTitle) {
+                case 'Transfer':
+                  servicesTitle = 'Transfers';
+                  break;
+                case 'Tour':
+                  servicesTitle = 'Tours';
+                  break;
+                case 'Transit Tour':
+                  servicesTitle = 'Transit Tours';
+                  break;
+                case 'Meet & Greet':
+                  servicesTitle = 'Meet & Greet';
+                  break;
+                case 'Hotel':
+                  servicesTitle = 'Hotels';
+                  break;
+                default:
+                  servicesTitle = homeTitle;
+              }
+
+              final items = getServiceItems(
+                servicesTitle,
+              ); // helper in a shared place
+              context.goNamed(
+                'service-listing',
+                extra: {'title': servicesTitle, 'items': items},
+              );
+            },
+          );
         },
       ),
     );
@@ -237,7 +303,9 @@ class _HomePageState extends State<HomePage> {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-        itemCount: _featured_tours_n_packages.length > 5 ? 6 : _featured_tours_n_packages.length,
+        itemCount: _featured_tours_n_packages.length > 5
+            ? 6
+            : _featured_tours_n_packages.length,
         separatorBuilder: (_, __) => SizedBox(width: 12.w),
         itemBuilder: (context, index) {
           // If more than 5 services and index == 5 → show arrow
