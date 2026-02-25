@@ -13,8 +13,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutes.login,
     routes: [
-
-      // ── Auth Routes (no shell, no bottom nav) ──────────────────
+      // ── Shell: shows bottom nav ──────────────────────────────
       GoRoute(
         path: AppRoutes.splash,
         builder: (context, state) => const SplashPage(),
@@ -34,7 +33,6 @@ class AppRouter {
           return HomeShell(navigationShell: navigationShell);
         },
         branches: [
-
           // Branch 0 — Home
           StatefulShellBranch(
             routes: [
@@ -56,13 +54,13 @@ class AppRouter {
                     path: 'listing',
                     name: 'service-listing',
                     builder: (context, state) {
-                      final extra =state.extra as Map<String, dynamic>;
+                      final extra = state.extra as Map<String, dynamic>;
                       return ServiceListingPage(
                         title: extra['title'] as String,
                         items: extra['items'] as List<Map<String, dynamic>>,
                       );
-                    }
-                  )
+                    },
+                  ),
                   // nested service routes go here later
                   // GoRoute(path: 'transfers', ...)
                   // GoRoute(path: 'meet-greet', ...)
@@ -99,17 +97,17 @@ class AppRouter {
 class AppRoutes {
   AppRoutes._();
 
-  static const String splash       = '/splash';
-  static const String login        = '/login';
-  static const String signUp       = '/signup';
-  static const String home         = '/home';
-  static const String services     = '/services';
-  static const String bookings     = '/bookings';
-  static const String profile      = '/profile';
+  static const String splash = '/splash';
+  static const String login = '/login';
+  static const String signUp = '/signup';
+  static const String home = '/home';
+  static const String services = '/services';
+  static const String bookings = '/bookings';
+  static const String profile = '/profile';
 
   // these will be nested under services later
-  static const String transfers    = '/services/transfers';
-  static const String meetGreet    = '/services/meet-greet';
+  static const String transfers = '/services/transfers';
+  static const String meetGreet = '/services/meet-greet';
   static const String transitTours = '/services/transit-tours';
   static const String tripPackages = '/services/trip-packages';
   static const String hotelBooking = '/services/hotel-booking';

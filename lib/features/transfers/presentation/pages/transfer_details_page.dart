@@ -264,7 +264,7 @@ class TransferDetailsPage extends StatelessWidget {
             SizedBox(width: AppSpacing.sm),
             Expanded(
               child: SizedBox(
-                height: 48.h,
+                height: 38.h,
                 child: ElevatedButton(
                   onPressed: () {
                     /* TODO: open booking flow */
@@ -272,7 +272,7 @@ class TransferDetailsPage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(
                       0,
-                      48.h,
+                      38.h,
                     ), // 👈 override global infinite width
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,

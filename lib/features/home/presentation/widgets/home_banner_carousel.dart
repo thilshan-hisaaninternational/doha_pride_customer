@@ -11,7 +11,10 @@ class HomeBannerCarousel extends StatefulWidget {
 }
 
 class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
-  final _controller = PageController(); // full width
+  final PageController _controller = PageController(
+    initialPage: 1000,
+  ); // full width
+
   int _current = 0;
 
   final _banners = [
@@ -22,20 +25,20 @@ class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
       'subtitle': 'Guided tours & experiences',
       'cta': 'Explore tours',
     },
-    // {
-    //   'image':
-    //       'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80',
-    //   'title': 'Airport Transfers',
-    //   'subtitle': 'Comfortable rides 24/7',
-    //   'cta': 'Book transfer',
-    // },
-    // {
-    //   'image':
-    //       'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-    //   'title': 'Premium Stays',
-    //   'subtitle': 'Handpicked hotels in Doha',
-    //   'cta': 'View hotels',
-    // },
+    {
+      'image':
+          'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80',
+      'title': 'Airport Transfers',
+      'subtitle': 'Comfortable rides 24/7',
+      'cta': 'Book transfer',
+    },
+    {
+      'image':
+          'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+      'title': 'Premium Stays',
+      'subtitle': 'Handpicked hotels in Doha',
+      'cta': 'View hotels',
+    },
   ];
 
   @override
@@ -55,10 +58,18 @@ class _HomeBannerCarouselState extends State<HomeBannerCarousel> {
             borderRadius: BorderRadius.circular(20.r),
             child: PageView.builder(
               controller: _controller,
-              itemCount: _banners.length,
-              onPageChanged: (i) => setState(() => _current = i),
+              itemCount: _banners.length * 1000,
+              onPageChanged: (index) {
+                setState(() {
+                  // keep current index in 0.._banners.length-1
+                  _current = index % _banners.length;
+                });
+              },
               itemBuilder: (context, index) {
-                final item = _banners[index];
+                // loop over banners using modulo
+                final bannerIndex = index % _banners.length;
+                final item = _banners[bannerIndex];
+
                 return Stack(
                   fit: StackFit.expand,
                   children: [
