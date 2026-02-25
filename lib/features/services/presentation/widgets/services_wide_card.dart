@@ -88,8 +88,6 @@ class ServiceWideCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-
-                        // Arrow (navigation hint)
                         Icon(
                           Iconsax.arrow_right_3,
                           color: Colors.white,
@@ -97,25 +95,19 @@ class ServiceWideCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Positioned(
-                      // left: 60.w,
-                      right: 36.w,
-                      // bottom: 14.h,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 1.w),
-                        child: Text(
-                          service['subtitle'],
-                          style: AppTextStyles.bodySmall.copyWith(
-                            color: AppColors.background,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      service['subtitle'],
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.background,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
               ),
+
             ],
           ),
 

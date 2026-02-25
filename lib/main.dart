@@ -1,11 +1,25 @@
 import 'package:doha_pride_customer/core/router/app_router.dart';
 import 'package:doha_pride_customer/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/di/dependency_injection.dart' as di ;
 
 void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
+  
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: SystemUiOverlay.values, // show top (status) and bottom bars
+  );
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,        // no solid bar
+    statusBarIconBrightness: Brightness.dark,  // Android: dark icons
+    statusBarBrightness: Brightness.light,     // iOS: dark icons on light bg
+  ));
+
+  
   await di.initDependencies();
   runApp(const DohaprideApp());
 }
