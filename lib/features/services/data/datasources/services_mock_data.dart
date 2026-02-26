@@ -161,23 +161,159 @@ List<Map<String, dynamic>> getServiceItems(String serviceTitle) {
         },
       ];
 
-    case 'Hotels':
+    case 'Transit Tours':
       return [
         {
-          'title': '5-Star Luxury Hotel Stay',
-          'description': 'Premium luxury hotels in prime Doha locations.',
-          'price': 'From QAR 500',
-          'duration': 'Starting From',
+          'title': 'Transit Exclusive - Discover Doha',
+          'description':
+              'Price per person based on 5 in a vehicle · City Tour · 3 hours · 6 hours transit',
+          'price': 'From QAR 115',
+          'duration': '3 hours · 6 hours transit',
           'image':
-              'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.building_4,
+              'https://images.unsplash.com/photo-1578898887932-dce23a595ad4?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map_1,
           'badges': [
-            {'icon': Iconsax.crown, 'label': 'Luxury'},
-            {'icon': Iconsax.clock, 'label': '40 mins'},
+            {'icon': Iconsax.map_1, 'label': 'City Tour'},
+            {'icon': Iconsax.clock, 'label': '3 hrs'},
+          ],
+        },
+        {
+          'title':
+              'Transit Exclusive - Discover the Desert and Inland Sea (Private Tour)',
+          'description':
+              'Price per person based on 5 in a vehicle · Adventure · Nature · 4 hours · 8 hours transit',
+          'price': 'From QAR 227',
+          'duration': '4 hours · 8 hours transit',
+          'image':
+              'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map_1,
+          'badges': [
+            {'icon': Iconsax.crown, 'label': 'Private'},
+            {'icon': Iconsax.clock, 'label': '4 hrs'},
+          ],
+        },
+        {
+          'title': 'Transit Exclusive - Discover Doha by Night',
+          'description':
+              'Price per person based on 5 in a vehicle · Night Tour · City Tour · 3 hours · 6 hours transit',
+          'price': 'From QAR 74',
+          'duration': '3 hours · 6 hours transit',
+          'image':
+              'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map_1,
+          'badges': [
+            {'icon': Iconsax.moon, 'label': 'Night'},
+            {'icon': Iconsax.clock, 'label': '3 hrs'},
           ],
         },
       ];
 
+    case 'Transit Tours':
+      return [
+        {
+          'title': 'Transit Exclusive - Discover Doha',
+          'description':
+              'Price per person based on 5 in a vehicle · City Tour · 3 hours · 6 hours transit',
+          'price': 'From QAR 115',
+          'duration': '3 hours · 6 hours transit',
+          'image':
+              'https://images.unsplash.com/photo-1578898887932-dce23a595ad4?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map_1,
+          'badges': [
+            {'icon': Iconsax.map_1, 'label': 'City Tour'},
+            {'icon': Iconsax.clock, 'label': '3 hrs'},
+          ],
+        },
+        {
+          'title':
+              'Transit Exclusive - Discover the Desert and Inland Sea (Private Tour)',
+          'description':
+              'Price per person based on 5 in a vehicle · Adventure · Nature · 4 hours · 8 hours transit',
+          'price': 'From QAR 227',
+          'duration': '4 hours · 8 hours transit',
+          'image':
+              'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map_1,
+          'badges': [
+            {'icon': Iconsax.crown, 'label': 'Private'},
+            {'icon': Iconsax.clock, 'label': '4 hrs'},
+          ],
+        },
+        {
+          'title': 'Transit Exclusive - Discover Doha by Night',
+          'description':
+              'Price per person based on 5 in a vehicle · Night Tour · City Tour · 3 hours · 6 hours transit',
+          'price': 'From QAR 74',
+          'duration': '3 hours · 6 hours transit',
+          'image':
+              'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.map_1,
+          'badges': [
+            {'icon': Iconsax.moon, 'label': 'Night'},
+            {'icon': Iconsax.clock, 'label': '3 hrs'},
+          ],
+        },
+      ];
+
+    case 'Hotels':
+      return [
+        {
+          'title': 'Standard View',
+          'description':
+              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests',
+          'price': 'QAR 459',
+          'duration': 'Per night',
+          'image':
+              'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.building_4,
+          'badges': [
+            {'icon': Iconsax.home1, 'label': '1 bed'},
+            {'icon': Iconsax.user, 'label': '2 guests'},
+          ],
+        },
+        {
+          'title': 'Premium View',
+          'description':
+              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests',
+          'price': 'QAR 459',
+          'duration': 'Per night',
+          'image':
+              'https://images.unsplash.com/photo-1512914890250-353c97c9e7e2?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.building_4,
+          'badges': [
+            {'icon': Iconsax.activity, 'label': 'Premium view'},
+            {'icon': Iconsax.user, 'label': '2 guests'},
+          ],
+        },
+        {
+          'title': 'Beach View',
+          'description':
+              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests',
+          'price': 'QAR 459',
+          'duration': 'Per night',
+          'image':
+              'https://images.unsplash.com/photo-1501117716987-c8e1ecb2108a?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.building_4,
+          'badges': [
+            {'icon': Iconsax.sun_1, 'label': 'Beach view'},
+            {'icon': Iconsax.user, 'label': '2 guests'},
+          ],
+        },
+        {
+          'title': 'Luxury Breakfast',
+          'description':
+              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests · breakfast included',
+          'price': 'QAR 459',
+          'duration': 'Per night',
+          'image':
+              'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.building_4,
+          'badges': [
+            {'icon': Iconsax.coffee, 'label': 'Breakfast'},
+            {'icon': Iconsax.user, 'label': '2 guests'},
+          ],
+        },
+      ];
     default:
       return [];
   }
