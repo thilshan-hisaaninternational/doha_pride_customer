@@ -3,6 +3,7 @@ import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TransferDetailsPage extends StatelessWidget {
@@ -267,7 +268,14 @@ class TransferDetailsPage extends StatelessWidget {
                 height: 38.h,
                 child: ElevatedButton(
                   onPressed: () {
-                    /* TODO: open booking flow */
+                    context.pushNamed(
+                      'transfer-booking-options',
+                      extra: {
+                        'title': title,
+                        'imageUrl': imageUrl,
+                        'fromPrice': fromPrice,
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(
