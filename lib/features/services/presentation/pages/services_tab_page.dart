@@ -65,7 +65,7 @@ class _ServicesTabState extends State<ServicesTab> {
                         AppSpacing.screenPadding,
                         0,
                         AppSpacing.screenPadding,
-                        120.h, // space above bottom nav
+                        AppSpacing.bottomPadding, // space above bottom nav
                       ),
                       itemCount: _filtered.length,
                       separatorBuilder: (_, __) => SizedBox(height: 16.h),

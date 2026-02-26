@@ -88,9 +88,7 @@ class _BookingsTabState extends State<BookingsTab> {
 
   List<Map<String, dynamic>> get _filtered {
     if (_selectedFilter == BookingFilter.all) return _bookings;
-    return _bookings
-        .where((b) => b['status'] == _selectedFilter.name)
-        .toList();
+    return _bookings.where((b) => b['status'] == _selectedFilter.name).toList();
   }
 
   // summary counts for the stat cards
@@ -110,13 +108,11 @@ class _BookingsTabState extends State<BookingsTab> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             // ── AppBar ───────────────────────────────────────────
             _buildAppBar(),
 
             // ── Stats Row ────────────────────────────────────────
             // _buildStatsRow(),
-
             SizedBox(height: AppSpacing.md),
 
             // ── Filter Tabs ──────────────────────────────────────
@@ -133,7 +129,7 @@ class _BookingsTabState extends State<BookingsTab> {
                         AppSpacing.screenPadding,
                         AppSpacing.sm,
                         AppSpacing.screenPadding,
-                        120.h,
+                        AppSpacing.bottomPadding, // space ab
                       ),
                       itemCount: _filtered.length,
                       separatorBuilder: (_, __) => SizedBox(height: 14.h),
@@ -142,9 +138,7 @@ class _BookingsTabState extends State<BookingsTab> {
                           booking: _filtered[index],
                           onTap: () {},
                           onCancel: _filtered[index]['status'] == 'upcoming'
-                              ? () => _showCancelDialog(
-                                    _filtered[index]['id'],
-                                  )
+                              ? () => _showCancelDialog(_filtered[index]['id'])
                               : null,
                         );
                       },
@@ -206,7 +200,6 @@ class _BookingsTabState extends State<BookingsTab> {
     );
   }
 
-
   // ── Filter Tabs ─────────────────────────────────────────────────
 
   Widget _buildFilterTabs() {
@@ -231,7 +224,7 @@ class _BookingsTabState extends State<BookingsTab> {
                 boxShadow: isActive
                     ? [
                         BoxShadow(
-                          color: AppColors.primary.withValues(alpha:  0.3),
+                          color: AppColors.primary.withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 3),
                         ),
@@ -249,8 +242,7 @@ class _BookingsTabState extends State<BookingsTab> {
                   label,
                   style: AppTextStyles.bodySmall.copyWith(
                     color: isActive ? Colors.white : AppColors.textSecondary,
-                    fontWeight:
-                        isActive ? FontWeight.w600 : FontWeight.w400,
+                    fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                   ),
                 ),
               ),
@@ -315,10 +307,7 @@ class _BookingsTabState extends State<BookingsTab> {
               // trigger cancel use case later
             },
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.w,
-                vertical: 8.h,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               decoration: BoxDecoration(
                 color: AppColors.error,
                 borderRadius: BorderRadius.circular(10.r),
@@ -337,4 +326,3 @@ class _BookingsTabState extends State<BookingsTab> {
     );
   }
 }
-

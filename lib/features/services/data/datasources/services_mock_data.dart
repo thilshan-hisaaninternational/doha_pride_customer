@@ -300,59 +300,43 @@ List<Map<String, dynamic>> getServiceItems(String serviceTitle) {
       return [
         {
           'title': 'Standard View',
-          'description':
-              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests',
+          'location': 'Doha Corniche, Qatar',
           'price': 'QAR 459',
-          'duration': 'Per night',
+          'rating': 4.5,
+          'beds': 1,
+          'guests': 2,
           'image':
               'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.building_4,
-          'badges': [
-            {'icon': Iconsax.home1, 'label': '1 bed'},
-            {'icon': Iconsax.user, 'label': '2 guests'},
-          ],
         },
         {
           'title': 'Premium View',
-          'description':
-              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests',
+          'location': 'Doha Corniche, Qatar',
           'price': 'QAR 459',
-          'duration': 'Per night',
+          'rating': 4.5,
+          'beds': 1,
+          'guests': 2,
           'image':
-              'https://images.unsplash.com/photo-1512914890250-353c97c9e7e2?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.building_4,
-          'badges': [
-            {'icon': Iconsax.activity, 'label': 'Premium view'},
-            {'icon': Iconsax.user, 'label': '2 guests'},
-          ],
+              'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
         },
         {
           'title': 'Beach View',
-          'description':
-              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests',
+          'location': 'Doha Corniche, Qatar',
           'price': 'QAR 459',
-          'duration': 'Per night',
+          'rating': 4.5,
+          'beds': 1,
+          'guests': 2,
           'image':
-              'https://images.unsplash.com/photo-1501117716987-c8e1ecb2108a?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.building_4,
-          'badges': [
-            {'icon': Iconsax.sun_1, 'label': 'Beach view'},
-            {'icon': Iconsax.user, 'label': '2 guests'},
-          ],
+              'ttps://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80',
         },
         {
           'title': 'Luxury Breakfast',
-          'description':
-              'Doha Corniche, Qatar · QAR 459 · 4.5★ · 1 bed · 2 guests · breakfast included',
+          'location': 'Doha Corniche, Qatar',
           'price': 'QAR 459',
-          'duration': 'Per night',
+          'rating': 4.5,
+          'beds': 1,
+          'guests': 2,
           'image':
               'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.building_4,
-          'badges': [
-            {'icon': Iconsax.coffee, 'label': 'Breakfast'},
-            {'icon': Iconsax.user, 'label': '2 guests'},
-          ],
         },
       ];
     default:

@@ -25,7 +25,18 @@ class ServiceListingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(title: Text(title), centerTitle: true),
+      appBar: AppBar(
+        title: Text(title),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list),
+            onPressed: () {
+              // TODO: open filter bottom sheet / dialog
+            },
+          ),
+        ],
+      ),
       body: ListView.separated(
         padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 120.h),
         itemCount: items.length,
