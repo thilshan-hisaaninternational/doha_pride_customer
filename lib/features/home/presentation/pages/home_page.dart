@@ -4,11 +4,11 @@ import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_appbar.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_banner_carousel.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_drawer.dart';
-import 'package:doha_pride_customer/features/home/presentation/widgets/home_featured_packages_section.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_featured_service_section.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_need_help.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_search_bar.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_section_header.dart';
-import 'package:doha_pride_customer/features/home/presentation/widgets/home_transfers_section.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_feature_tours_package_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // Horizontally scrolling featured services from mock data.
-            SliverToBoxAdapter(child: const HomeFeaturedPackagesSection()),
+            SliverToBoxAdapter(child: const HomeFeaturedServiceSection()),
 
             // ── Section: Featured Tours & Packages ────────────────────────
             SliverToBoxAdapter(
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
             // Horizontally scrolling transfers/tours carousel.
-            SliverToBoxAdapter(child: const HomeTransfersSection()),
+            SliverToBoxAdapter(child: const HomeFeaturedToursPackagesSection()),
 
             SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
 

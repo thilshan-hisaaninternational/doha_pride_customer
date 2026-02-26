@@ -1,12 +1,12 @@
 import 'package:doha_pride_customer/features/auth/presentation/pages/signin_page.dart';
 import 'package:doha_pride_customer/features/auth/presentation/pages/signup_page.dart';
-import 'package:doha_pride_customer/features/my_bookings/presentation/pages/booking_page.dart';
+import 'package:doha_pride_customer/features/my_bookings/presentation/pages/booking_tab_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_shell.dart';
-import 'package:doha_pride_customer/features/profile/presentation/pages/profile_page.dart';
+import 'package:doha_pride_customer/features/profile/presentation/pages/profile_tab_page.dart';
 import 'package:doha_pride_customer/features/services/domain/service_type.dart';
 import 'package:doha_pride_customer/features/services/presentation/pages/service_list_page.dart';
-import 'package:doha_pride_customer/features/services/presentation/pages/services_page.dart';
+import 'package:doha_pride_customer/features/services/presentation/pages/services_tab_page.dart';
 import 'package:doha_pride_customer/features/splash/presentation/pages/splash_page.dart';
 import 'package:doha_pride_customer/features/transfers/presentation/pages/transfer_details_page.dart';
 import 'package:go_router/go_router.dart';

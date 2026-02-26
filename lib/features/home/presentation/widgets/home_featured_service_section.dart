@@ -1,14 +1,15 @@
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/features/home/data/datasources/home_mock_data.dart';
+import 'package:doha_pride_customer/features/home/presentation/widgets/home_featured_service_card.dart';
 import 'package:doha_pride_customer/features/home/presentation/widgets/home_see_all_arrow_card.dart';
-import 'package:doha_pride_customer/features/home/presentation/widgets/home_package_card.dart';
 import 'package:doha_pride_customer/features/services/data/datasources/services_mock_data.dart';
+import 'package:doha_pride_customer/features/services/domain/service_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeFeaturedPackagesSection extends StatelessWidget {
-  const HomeFeaturedPackagesSection({super.key});
+class HomeFeaturedServiceSection extends StatelessWidget {
+  const HomeFeaturedServiceSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class HomeFeaturedPackagesSection extends StatelessWidget {
 
           final item = homeServicesMock[index];
 
-          return FeaturedServicesCard(
+          return HomeFeaturedServiceCard(
             item: item,
             onTap: () {
               final homeTitle = item['title'] as String;
@@ -62,7 +63,11 @@ class HomeFeaturedPackagesSection extends StatelessWidget {
 
               context.goNamed(
                 'service-listing',
-                extra: {'title': servicesTitle, 'items': items},
+                extra: {
+                  'serviceType': serviceTypeFromTitle(servicesTitle),
+                  'title': servicesTitle,
+                  'items': items,
+                },
               );
             },
           );

@@ -1,4 +1,3 @@
-// features/profile/presentation/widgets/profile_avatar.dart
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +40,7 @@ class ProfileAvatar extends StatelessWidget {
               )
             : null,
         image: imageUrl != null
-            ? DecorationImage(
-                image: NetworkImage(imageUrl!),
-                fit: BoxFit.cover,
-              )
+            ? DecorationImage(image: NetworkImage(imageUrl!), fit: BoxFit.cover)
             : null,
       ),
       child: imageUrl == null

@@ -1,4 +1,4 @@
-import 'package:doha_pride_customer/features/services/presentation/widgets/service_item_card.dart';
+import 'package:doha_pride_customer/features/transfers/presentation/widgets/transfer_service_card.dart';
 import 'package:flutter/material.dart';
 
 /// Meet & Greet–specific card for the service listing.
@@ -14,6 +14,6 @@ class MeetGreetServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ServiceItemCard(item: item, onTap: onTap);
+    return MeetGreetServiceCard(item: item, onTap: onTap);
   }
 }

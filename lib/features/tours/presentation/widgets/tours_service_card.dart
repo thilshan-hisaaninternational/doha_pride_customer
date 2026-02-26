@@ -12,14 +12,12 @@ class ToursServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16.r),
       child: Container(
         margin: EdgeInsets.only(bottom: AppSpacing.md),
-        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
@@ -29,51 +27,72 @@ class ToursServiceCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Left: tour image
+            // Image only (no badge)
             ClipRRect(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
               child: Image.network(
                 item['image'] as String,
-                width: 90.w,
-                height: 90.w,
+                height: 170.h,
+                width: double.infinity,
                 fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
+                  height: 170.h,
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                ),
               ),
             ),
-            SizedBox(width: 12.w),
 
-            // Right: text & price
-            Expanded(
+            // Text content
+            Padding(
+              padding: EdgeInsets.all(14.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Title
                   Text(item['title'] as String, style: AppTextStyles.heading3),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: 6.h),
+
+                  // Description (max 2 lines)
                   Text(
                     item['description'] as String,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.bodySmall.copyWith(
                       color: AppColors.textSecondary,
+                      height: 1.4,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 12.h),
+
+                  // Price + Duration
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        item['price'] as String,
-                        style: AppTextStyles.heading3.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item['duration'] as String,
+                            style: AppTextStyles.bodySmall.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
+                          Text(
+                            item['price'] as String,
+                            style: AppTextStyles.heading3.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        item['duration'] as String,
-                        style: AppTextStyles.caption.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16.sp,
+                        color: AppColors.primary,
                       ),
                     ],
                   ),

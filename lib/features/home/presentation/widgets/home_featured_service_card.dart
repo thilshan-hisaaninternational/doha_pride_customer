@@ -4,15 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
-class FeaturedServicesCard extends StatelessWidget {
+class HomeFeaturedServiceCard extends StatelessWidget {
   final Map<String, dynamic> item;
   final VoidCallback? onTap;
 
-  const FeaturedServicesCard({
-    super.key,
-    required this.item,
-    this.onTap,
-  });
+  const HomeFeaturedServiceCard({super.key, required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {

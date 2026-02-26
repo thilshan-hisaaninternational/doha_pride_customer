@@ -1,4 +1,3 @@
-// services_page.dart
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
@@ -11,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:doha_pride_customer/features/services/data/datasources/services_mock_data.dart';
-import 'package:doha_pride_customer/features/services/domain/service_type.dart';
 
 class ServicesTab extends StatefulWidget {
   const ServicesTab({super.key});
@@ -75,32 +72,6 @@ class _ServicesTabState extends State<ServicesTab> {
                       itemBuilder: (context, index) {
                         return ServiceWideCard(
                           service: _filtered[index],
-
-                          // onTap: () {
-                          // final service = _filtered[index];
-
-                          // context.pushNamed(
-                          //   'service-listing',
-                          //   extra: {
-                          //     'title': service['title'],
-                          //     'items': getServiceItems(service['title']),
-                          //   },
-                          // );
-
-                          // },
-                          // onTap: () {
-                          //   final service = _filtered[index];
-                          //   final title = service['title'] as String;
-
-                          //   context.pushNamed(
-                          //     'service-listing',
-                          //     extra: {
-                          //       'serviceType': serviceTypeFromTitle(title),
-                          //       'title': title,
-                          //       'items': getServiceItems(title),
-                          //     },
-                          //   );
-                          // },
                           onTap: () {
                             final service = _filtered[index];
                             final title = service['title'] as String;

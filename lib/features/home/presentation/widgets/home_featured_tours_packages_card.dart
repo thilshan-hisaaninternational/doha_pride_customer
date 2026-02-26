@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
-class FeaturedToursNPackagesCard extends StatelessWidget {
+class HomeFeaturedToursPackagesCard extends StatelessWidget {
   final Map<String, dynamic> item;
   final VoidCallback? onTap;
 
-  const FeaturedToursNPackagesCard({super.key, required this.item, this.onTap});
+  const HomeFeaturedToursPackagesCard({
+    super.key,
+    required this.item,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

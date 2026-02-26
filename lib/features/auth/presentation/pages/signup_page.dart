@@ -199,9 +199,6 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
 
-             
-
-
                   SizedBox(height: AppSpacing.md),
 
                   // ── Username ─────────────────────────────────────
@@ -338,15 +335,15 @@ class _SignupPageState extends State<SignupPage> {
 
                   SizedBox(height: AppSpacing.lg),
 
-                       // ── 3. Social Buttons FIRST ──────────────────
-                    _buildSocialButtons(),
+                  // ── 3. Social Buttons FIRST ──────────────────
+                  _buildSocialButtons(),
 
-                    SizedBox(height: AppSpacing.md),
+                  SizedBox(height: AppSpacing.md),
 
-                    // // // ── 4. Divider ───────────────────────────────
-                    // _buildDivider(),
+                  // // // ── 4. Divider ───────────────────────────────
+                  // _buildDivider(),
 
-                    // SizedBox(height: AppSpacing.lg),
+                  // SizedBox(height: AppSpacing.lg),
 
                   // ── Terms ─────────────────────────────────────────
                   Center(
@@ -413,7 +410,7 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
- // ── Social Buttons ────────────────────────────────────────────
+  // ── Social Buttons ────────────────────────────────────────────
 
   Widget _buildSocialButtons() {
     return Column(
@@ -440,31 +437,27 @@ class _SignupPageState extends State<SignupPage> {
       ],
     );
   }
-
-
-  
 }
 
+// ── Divider ───────────────────────────────────────────────────
 
-  // ── Divider ───────────────────────────────────────────────────
-
-  Widget _buildDivider() {
-    return Row(
-      children: [
-        const Expanded(child: Divider()),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-          child: Text(
-            'or sign in with account',
-            style: AppTextStyles.caption.copyWith(
-              color: AppColors.textSecondary,
-            ),
-          ),
-        ),
-        const Expanded(child: Divider()),
-      ],
-    );
-  }
+// Widget _buildDivider() {
+//   return Row(
+//     children: [
+//       const Expanded(child: Divider()),
+//       Padding(
+//         padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+//         child: Text(
+//           'or sign in with account',
+//           style: AppTextStyles.caption.copyWith(
+//             color: AppColors.textSecondary,
+//           ),
+//         ),
+//       ),
+//       const Expanded(child: Divider()),
+//     ],
+//   );
+// }
 
 // ── Private Widgets ──────────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-import 'package:doha_pride_customer/features/services/presentation/widgets/service_item_card.dart';
+import 'package:doha_pride_customer/features/transfers/presentation/widgets/transfer_service_card.dart';
 import 'package:flutter/material.dart';
 
 /// Hotels-specific card for the service listing.
@@ -10,6 +10,6 @@ class HotelsServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ServiceItemCard(item: item, onTap: onTap);
+    return HotelsServiceCard(item: item, onTap: onTap);
   }
 }
