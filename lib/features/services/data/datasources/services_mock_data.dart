@@ -167,7 +167,7 @@ List<Map<String, dynamic>> getServiceItems(String serviceTitle) {
           'title': 'Transit Exclusive - Discover Doha',
           'description':
               'Price per person based on 5 in a vehicle · City Tour · 3 hours · 6 hours transit',
-          'price': 'From QAR 115',
+          'price': 'QAR 115',
           'duration': '3 hours · 6 hours transit',
           'image':
               'https://images.unsplash.com/photo-1578898887932-dce23a595ad4?auto=format&fit=crop&w=800&q=80',
@@ -182,7 +182,7 @@ List<Map<String, dynamic>> getServiceItems(String serviceTitle) {
               'Transit Exclusive - Discover the Desert and Inland Sea (Private Tour)',
           'description':
               'Price per person based on 5 in a vehicle · Adventure · Nature · 4 hours · 8 hours transit',
-          'price': 'From QAR 227',
+          'price': 'QAR 227',
           'duration': '4 hours · 8 hours transit',
           'image':
               'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
@@ -196,7 +196,7 @@ List<Map<String, dynamic>> getServiceItems(String serviceTitle) {
           'title': 'Transit Exclusive - Discover Doha by Night',
           'description':
               'Price per person based on 5 in a vehicle · Night Tour · City Tour · 3 hours · 6 hours transit',
-          'price': 'From QAR 74',
+          'price': 'QAR 74',
           'duration': '3 hours · 6 hours transit',
           'image':
               'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',

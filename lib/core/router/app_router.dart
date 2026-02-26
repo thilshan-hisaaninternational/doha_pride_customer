@@ -2,16 +2,20 @@ import 'package:doha_pride_customer/features/auth/presentation/pages/signin_page
 import 'package:doha_pride_customer/features/auth/presentation/pages/signup_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_page.dart';
 import 'package:doha_pride_customer/features/home/presentation/pages/home_shell.dart';
+import 'package:doha_pride_customer/features/hotel_bookings/presentation/pages/hotel_details_page.dart';
+import 'package:doha_pride_customer/features/meet_greet/presentation/pages/meet_greet_details_page.dart';
 import 'package:doha_pride_customer/features/my_bookings/presentation/pages/booking_tab_page.dart';
 import 'package:doha_pride_customer/features/profile/presentation/pages/profile_tab_page.dart';
 import 'package:doha_pride_customer/features/services/domain/service_type.dart';
 import 'package:doha_pride_customer/features/services/presentation/pages/service_list_page.dart';
 import 'package:doha_pride_customer/features/services/presentation/pages/services_tab_page.dart';
 import 'package:doha_pride_customer/features/splash/presentation/pages/splash_page.dart';
+import 'package:doha_pride_customer/features/tours/presentation/pages/tour_details_page.dart';
 import 'package:doha_pride_customer/features/transfers/presentation/pages/transfer_booking_options_page.dart';
 import 'package:doha_pride_customer/features/transfers/presentation/pages/transfer_details_page.dart';
 import 'package:doha_pride_customer/features/transfers/presentation/pages/transfer_passenger_details_page.dart';
 import 'package:doha_pride_customer/features/transfers/presentation/pages/transfer_review_page.dart';
+import 'package:doha_pride_customer/features/transit_tours/presentation/pages/transit_tours_details_page.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -116,7 +120,7 @@ class AppRouter {
                         name: 'tour-details',
                         builder: (context, state) {
                           final extra = state.extra as Map<String, dynamic>;
-                          return TransferDetailsPage(
+                          return TourDetailsPage(
                             title: extra['title'] as String,
                             imageUrl: extra['imageUrl'] as String,
                             fromPrice: extra['fromPrice'] as String,
@@ -128,7 +132,7 @@ class AppRouter {
                         name: 'transit-details',
                         builder: (context, state) {
                           final extra = state.extra as Map<String, dynamic>;
-                          return TransferDetailsPage(
+                          return TransitToursDetailsPage(
                             title: extra['title'] as String,
                             imageUrl: extra['imageUrl'] as String,
                             fromPrice: extra['fromPrice'] as String,
@@ -140,7 +144,7 @@ class AppRouter {
                         name: 'meet-greet-details',
                         builder: (context, state) {
                           final extra = state.extra as Map<String, dynamic>;
-                          return TransferDetailsPage(
+                          return MeetGreetDetailsPage(
                             title: extra['title'] as String,
                             imageUrl: extra['imageUrl'] as String,
                             fromPrice: extra['fromPrice'] as String,
@@ -152,7 +156,7 @@ class AppRouter {
                         name: 'hotel-details',
                         builder: (context, state) {
                           final extra = state.extra as Map<String, dynamic>;
-                          return TransferDetailsPage(
+                          return HotelDetailsPage(
                             title: extra['title'] as String,
                             imageUrl: extra['imageUrl'] as String,
                             fromPrice: extra['fromPrice'] as String,
@@ -160,6 +164,68 @@ class AppRouter {
                         },
                       ),
                     ],
+                    // routes: [
+                    //   GoRoute(
+                    //     path: 'transfer',
+                    //     name: 'transfer-details',
+                    //     builder: (context, state) {
+                    //       final extra = state.extra as Map<String, dynamic>;
+                    //       return TransferDetailsPage(
+                    //         title: extra['title'] as String,
+                    //         imageUrl: extra['imageUrl'] as String,
+                    //         fromPrice: extra['fromPrice'] as String,
+                    //       );
+                    //     },
+                    //   ),
+                    // GoRoute(
+                    //   path: 'tour',
+                    //   name: 'tour-details',
+                    //   builder: (context, state) {
+                    //     final extra = state.extra as Map<String, dynamic>;
+                    //     return TransferDetailsPage(
+                    //       title: extra['title'] as String,
+                    //       imageUrl: extra['imageUrl'] as String,
+                    //       fromPrice: extra['fromPrice'] as String,
+                    //     );
+                    //   },
+                    // ),
+                    // GoRoute(
+                    //   path: 'transit',
+                    //   name: 'transit-details',
+                    //   builder: (context, state) {
+                    //     final extra = state.extra as Map<String, dynamic>;
+                    //     return TransferDetailsPage(
+                    //       title: extra['title'] as String,
+                    //       imageUrl: extra['imageUrl'] as String,
+                    //       fromPrice: extra['fromPrice'] as String,
+                    //     );
+                    //   },
+                    // ),
+                    // GoRoute(
+                    //   path: 'meet-greet',
+                    //   name: 'meet-greet-details',
+                    //   builder: (context, state) {
+                    //     final extra = state.extra as Map<String, dynamic>;
+                    //     return TransferDetailsPage(
+                    //       title: extra['title'] as String,
+                    //       imageUrl: extra['imageUrl'] as String,
+                    //       fromPrice: extra['fromPrice'] as String,
+                    //     );
+                    //   },
+                    // ),
+                    // GoRoute(
+                    //   path: 'hotel',
+                    //   name: 'hotel-details',
+                    //   builder: (context, state) {
+                    //     final extra = state.extra as Map<String, dynamic>;
+                    //     return TransferDetailsPage(
+                    //       title: extra['title'] as String,
+                    //       imageUrl: extra['imageUrl'] as String,
+                    //       fromPrice: extra['fromPrice'] as String,
+                    //     );
+                    //   },
+                    // ),
+                    // ],
                   ),
                 ],
               ),
