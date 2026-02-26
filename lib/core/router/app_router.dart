@@ -45,31 +45,6 @@ class AppRouter {
           ),
 
           // Branch 1 — Services
-          // StatefulShellBranch(
-          //   routes: [
-          //     GoRoute(
-          //       path: AppRoutes.services,
-          //       builder: (context, state) => const ServicesTab(),
-          //       routes: [
-          //         GoRoute(
-          //           path: 'listing',
-          //           name: 'service-listing',
-          //           builder: (context, state) {
-          //             final extra = state.extra as Map<String, dynamic>;
-
-          //             return ServiceListingPage(
-          //               title: extra['title'] as String,
-          //               items: extra['items'] as List<Map<String, dynamic>>,
-          //               serviceType: extra['serviceType'] as ServiceType,
-          //             );
-          //           },
-          //         ),
-          //       ],
-          //     ),
-          //   ],
-          // ),
-
-          // Branch 1 — Services
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -88,10 +63,72 @@ class AppRouter {
                         serviceType: extra['serviceType'] as ServiceType,
                       );
                     },
+                    // routes: [
+                    //   GoRoute(
+                    //     path: 'transfer',
+                    //     name: 'transfer-details',
+                    //     builder: (context, state) {
+                    //       final extra = state.extra as Map<String, dynamic>;
+                    //       return TransferDetailsPage(
+                    //         title: extra['title'] as String,
+                    //         imageUrl: extra['imageUrl'] as String,
+                    //         fromPrice: extra['fromPrice'] as String,
+                    //       );
+                    //     },
+                    //   ),
+                    // ],
                     routes: [
                       GoRoute(
                         path: 'transfer',
                         name: 'transfer-details',
+                        builder: (context, state) {
+                          final extra = state.extra as Map<String, dynamic>;
+                          return TransferDetailsPage(
+                            title: extra['title'] as String,
+                            imageUrl: extra['imageUrl'] as String,
+                            fromPrice: extra['fromPrice'] as String,
+                          );
+                        },
+                      ),
+                      GoRoute(
+                        path: 'tour',
+                        name: 'tour-details',
+                        builder: (context, state) {
+                          final extra = state.extra as Map<String, dynamic>;
+                          return TransferDetailsPage(
+                            title: extra['title'] as String,
+                            imageUrl: extra['imageUrl'] as String,
+                            fromPrice: extra['fromPrice'] as String,
+                          );
+                        },
+                      ),
+                      GoRoute(
+                        path: 'transit',
+                        name: 'transit-details',
+                        builder: (context, state) {
+                          final extra = state.extra as Map<String, dynamic>;
+                          return TransferDetailsPage(
+                            title: extra['title'] as String,
+                            imageUrl: extra['imageUrl'] as String,
+                            fromPrice: extra['fromPrice'] as String,
+                          );
+                        },
+                      ),
+                      GoRoute(
+                        path: 'meet-greet',
+                        name: 'meet-greet-details',
+                        builder: (context, state) {
+                          final extra = state.extra as Map<String, dynamic>;
+                          return TransferDetailsPage(
+                            title: extra['title'] as String,
+                            imageUrl: extra['imageUrl'] as String,
+                            fromPrice: extra['fromPrice'] as String,
+                          );
+                        },
+                      ),
+                      GoRoute(
+                        path: 'hotel',
+                        name: 'hotel-details',
                         builder: (context, state) {
                           final extra = state.extra as Map<String, dynamic>;
                           return TransferDetailsPage(

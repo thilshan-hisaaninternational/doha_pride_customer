@@ -208,49 +208,90 @@ List<Map<String, dynamic>> getServiceItems(String serviceTitle) {
         },
       ];
 
-    case 'Transit Tours':
+    case 'Meet & Greet':
       return [
         {
-          'title': 'Transit Exclusive - Discover Doha',
+          'title': 'Arrival | Platinum',
           'description':
-              'Price per person based on 5 in a vehicle · City Tour · 3 hours · 6 hours transit',
-          'price': 'From QAR 115',
-          'duration': '3 hours · 6 hours transit',
+              'Arrival Platinum meet & assist service · distance (Airport service)',
+          'price': '',
+          'duration': 'Airport service',
           'image':
-              'https://images.unsplash.com/photo-1578898887932-dce23a595ad4?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.map_1,
+              'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.airplane,
           'badges': [
-            {'icon': Iconsax.map_1, 'label': 'City Tour'},
-            {'icon': Iconsax.clock, 'label': '3 hrs'},
+            {'icon': Iconsax.user, 'label': 'Arrival'},
+            {'icon': Iconsax.crown, 'label': 'Platinum'},
           ],
         },
         {
-          'title':
-              'Transit Exclusive - Discover the Desert and Inland Sea (Private Tour)',
+          'title': 'Departure | Platinum',
           'description':
-              'Price per person based on 5 in a vehicle · Adventure · Nature · 4 hours · 8 hours transit',
-          'price': 'From QAR 227',
-          'duration': '4 hours · 8 hours transit',
+              'Departure Platinum meet & assist service · distance (Airport service)',
+          'price': '',
+          'duration': 'Airport service',
           'image':
-              'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.map_1,
+              'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.airplane,
           'badges': [
-            {'icon': Iconsax.crown, 'label': 'Private'},
-            {'icon': Iconsax.clock, 'label': '4 hrs'},
+            {'icon': Iconsax.logout, 'label': 'Departure'},
+            {'icon': Iconsax.crown, 'label': 'Platinum'},
           ],
         },
         {
-          'title': 'Transit Exclusive - Discover Doha by Night',
+          'title': 'Arrival | Gold',
           'description':
-              'Price per person based on 5 in a vehicle · Night Tour · City Tour · 3 hours · 6 hours transit',
-          'price': 'From QAR 74',
-          'duration': '3 hours · 6 hours transit',
+              'Arrival Gold meet & assist service · distance (Airport service)',
+          'price': '',
+          'duration': 'Airport service',
           'image':
-              'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
-          'icon': Iconsax.map_1,
+              'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.airplane,
           'badges': [
-            {'icon': Iconsax.moon, 'label': 'Night'},
-            {'icon': Iconsax.clock, 'label': '3 hrs'},
+            {'icon': Iconsax.user, 'label': 'Arrival'},
+            {'icon': Iconsax.star, 'label': 'Gold'},
+          ],
+        },
+        {
+          'title': 'Departure | Gold',
+          'description':
+              'Departure Gold meet & assist service · distance (Airport service)',
+          'price': '',
+          'duration': 'Airport service',
+          'image':
+              'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.airplane,
+          'badges': [
+            {'icon': Iconsax.logout, 'label': 'Departure'},
+            {'icon': Iconsax.star, 'label': 'Gold'},
+          ],
+        },
+        {
+          'title': 'Transit | Platinum',
+          'description':
+              'Transit Platinum meet & assist service · distance (Airport service)',
+          'price': '',
+          'duration': 'Airport service',
+          'image':
+              'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.airplane,
+          'badges': [
+            {'icon': Iconsax.map_1, 'label': 'Transit'},
+            {'icon': Iconsax.crown, 'label': 'Platinum'},
+          ],
+        },
+        {
+          'title': 'Transit | Gold',
+          'description':
+              'Transit Gold meet & assist service · distance (Airport service)',
+          'price': '',
+          'duration': 'Airport service',
+          'image':
+              'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80',
+          'icon': Iconsax.airplane,
+          'badges': [
+            {'icon': Iconsax.map1, 'label': 'Transit'},
+            {'icon': Iconsax.star, 'label': 'Gold'},
           ],
         },
       ];

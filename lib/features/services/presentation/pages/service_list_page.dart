@@ -65,9 +65,11 @@ class ServiceListingPage extends StatelessWidget {
 
   /// Central place to decide where to navigate on tap.
   void _handleTap(BuildContext context, Map<String, dynamic> item) {
+    // debugPrint('=== TAP DEBUG ===');
+    // debugPrint('serviceType: $serviceType');
+    // debugPrint('item: $item');
     switch (serviceType) {
       case ServiceType.transfers:
-        // Go to transfer details route.
         context.pushNamed(
           'transfer-details',
           extra: {
@@ -79,19 +81,47 @@ class ServiceListingPage extends StatelessWidget {
         break;
 
       case ServiceType.tours:
-        // TODO: add proper Tours details route when ready.
+        context.pushNamed(
+          'tour-details',
+          extra: {
+            'title': item['title'] as String,
+            'imageUrl': item['image'] as String,
+            'fromPrice': (item['price'] ?? '').toString(),
+          },
+        );
         break;
 
       case ServiceType.transitTours:
-        // TODO: add Transit Tours details route when ready.
+        context.pushNamed(
+          'transit-details',
+          extra: {
+            'title': item['title'] as String,
+            'imageUrl': item['image'] as String,
+            'fromPrice': (item['price'] ?? '').toString(),
+          },
+        );
         break;
 
       case ServiceType.meetGreet:
-        // TODO: add Meet & Greet details route when ready.
+        context.pushNamed(
+          'meet-greet-details',
+          extra: {
+            'title': item['title'] as String,
+            'imageUrl': item['image'] as String,
+            'fromPrice': (item['price'] ?? '').toString(),
+          },
+        );
         break;
 
       case ServiceType.hotels:
-        // TODO: add Hotels details route when ready.
+        context.pushNamed(
+          'hotel-details',
+          extra: {
+            'title': item['title'] as String,
+            'imageUrl': item['image'] as String,
+            'fromPrice': (item['price'] ?? '').toString(),
+          },
+        );
         break;
     }
   }
