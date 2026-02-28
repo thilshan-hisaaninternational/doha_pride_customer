@@ -5,11 +5,15 @@ import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_spacing.dart';
 import 'package:doha_pride_customer/core/theme/app_text_styles.dart';
+import 'package:doha_pride_customer/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:doha_pride_customer/features/auth/presentation/bloc/auth_event.dart';
+import 'package:doha_pride_customer/features/auth/presentation/bloc/auth_state.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_button.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/app_text_field.dart';
 import 'package:doha_pride_customer/features/auth/presentation/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
@@ -115,14 +119,24 @@ class _SignupPageState extends State<SignupPage> {
 
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() => _isLoading = true);
+    // setState(() => _isLoading = true);
 
-    await Future.delayed(const Duration(seconds: 1)); // mock delay
+    // await Future.delayed(const Duration(seconds: 1)); // mock delay
 
-    if (mounted) {
-      setState(() => _isLoading = false);
-      // context.go(AppRoutes.home); // uncomment when auth BLoC ready
-    }
+    // if (mounted) {
+    //   setState(() => _isLoading = false);
+    //   // context.go(AppRoutes.home); // uncomment when auth BLoC ready
+    // }
+
+    context.read<AuthBloc>().add(
+      AuthRegisterRequested(
+        name: _usernameController.text.trim(), // or a separate name field
+        email: _emailController.text.trim(),
+        username: _usernameController.text.trim(),
+        phone: _phoneController.text.trim(),
+        password: _passwordController.text.trim(),
+      ),
+    );
   }
 
   Future<void> _googleSignIn() async {
@@ -188,223 +202,243 @@ class _SignupPageState extends State<SignupPage> {
             ),
             child: Form(
               key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ── Header ───────────────────────────────────────
-                  Text('Create Account', style: AppTextStyles.heading2),
-                  SizedBox(height: AppSpacing.xs),
-                  Text(
-                    'Fill in your details to get started',
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-
-                  SizedBox(height: AppSpacing.md),
-
-                  // ── Username ─────────────────────────────────────
-                  // Text('Username', style: AppTextStyles.labelMedium),
-                  // SizedBox(height: AppSpacing.xs),
-                  AppTextField(
-                    controller: _usernameController,
-                    label: 'Enter your username',
-                    focusNode: _usernameFocus,
-                    prefixIcon: Icon(
-                      Iconsax.user,
-                      size: AppIconSizes.sm,
-                      color: AppColors.textSecondary,
-                    ),
-                    textInputAction: TextInputAction.next,
-                    textCapitalization: TextCapitalization.none,
-                    inputFormatters: [
-                      // no spaces allowed in username
-                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                    ],
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_emailFocus);
-                    },
-                    validator: _validateUsername,
-                  ),
-
-                  SizedBox(height: AppSpacing.md),
-
-                  // ── Email ────────────────────────────────────────
-                  // Text('Email Address', style: AppTextStyles.labelMedium),
-                  // SizedBox(height: AppSpacing.xs),
-                  AppTextField(
-                    controller: _emailController,
-                    label: 'Enter your email',
-                    focusNode: _emailFocus,
-                    prefixIcon: Icon(
-                      Iconsax.sms,
-                      size: AppIconSizes.sm,
-                      color: AppColors.textSecondary,
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_phoneFocus);
-                    },
-                    validator: _validateEmail,
-                  ),
-
-                  SizedBox(height: AppSpacing.md),
-
-                  // ── Phone ────────────────────────────────────────
-                  // Text('Phone Number', style: AppTextStyles.labelMedium),
-                  // SizedBox(height: AppSpacing.xs),
-                  _PhoneField(
-                    controller: _phoneController,
-                    focusNode: _phoneFocus,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_passwordFocus);
-                    },
-                    validator: _validatePhone,
-                  ),
-
-                  SizedBox(height: AppSpacing.md),
-
-                  // ── Password ─────────────────────────────────────
-                  // Text('Password', style: AppTextStyles.labelMedium),
-                  // SizedBox(height: AppSpacing.xs),
-                  AppTextField(
-                    controller: _passwordController,
-                    label: 'Enter your password',
-                    focusNode: _passwordFocus,
-                    obscureText: _obscurePassword,
-                    prefixIcon: Icon(
-                      Iconsax.lock,
-                      size: AppIconSizes.sm,
-                      color: AppColors.textSecondary,
-                    ),
-                    suffixIcon: _PasswordToggle(
-                      isObscure: _obscurePassword,
-                      onTap: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
-                    ),
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_confirmPassFocus);
-                    },
-                    validator: _validatePassword,
-                  ),
-
-                  SizedBox(height: AppSpacing.xs),
-
-                  // password strength hint
-                  Text(
-                    'Min 8 characters, one uppercase, one number',
-                    style: AppTextStyles.caption.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-
-                  SizedBox(height: AppSpacing.md),
-
-                  // ── Confirm Password ──────────────────────────────
-                  // Text('Confirm Password', style: AppTextStyles.labelMedium),
-                  SizedBox(height: AppSpacing.xs),
-                  AppTextField(
-                    controller: _confirmPassController,
-                    label: 'Re-enter your password',
-                    focusNode: _confirmPassFocus,
-                    obscureText: _obscureConfirmPass,
-                    prefixIcon: Icon(
-                      Iconsax.lock_1,
-                      size: AppIconSizes.sm,
-                      color: AppColors.textSecondary,
-                    ),
-                    suffixIcon: _PasswordToggle(
-                      isObscure: _obscureConfirmPass,
-                      onTap: () => setState(
-                        () => _obscureConfirmPass = !_obscureConfirmPass,
+              child: BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state.status == AuthStatus.failure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          state.errorMessage ?? 'Registration failed',
+                        ),
                       ),
-                    ),
-                    textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (_) => _register(),
-                    validator: _validateConfirmPassword,
-                  ),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state.status == AuthStatus.loading;
 
-                  SizedBox(height: AppSpacing.xl),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // ── Header ───────────────────────────────────────
+                      Text('Create Account', style: AppTextStyles.heading2),
+                      SizedBox(height: AppSpacing.xs),
+                      Text(
+                        'Fill in your details to get started',
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
 
-                  // ── Register Button ───────────────────────────────
-                  AppButton(
-                    text: 'Create Account',
-                    isLoading: _isLoading,
-                    onPressed: _register,
-                  ),
+                      SizedBox(height: AppSpacing.md),
 
-                  SizedBox(height: AppSpacing.lg),
+                      // ── Username ─────────────────────────────────────
+                      // Text('Username', style: AppTextStyles.labelMedium),
+                      // SizedBox(height: AppSpacing.xs),
+                      AppTextField(
+                        controller: _usernameController,
+                        label: 'Enter your username',
+                        focusNode: _usernameFocus,
+                        prefixIcon: Icon(
+                          Iconsax.user,
+                          size: AppIconSizes.sm,
+                          color: AppColors.textSecondary,
+                        ),
+                        textInputAction: TextInputAction.next,
+                        textCapitalization: TextCapitalization.none,
+                        inputFormatters: [
+                          // no spaces allowed in username
+                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                        ],
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_emailFocus);
+                        },
+                        validator: _validateUsername,
+                      ),
 
-                  // ── 3. Social Buttons FIRST ──────────────────
-                  _buildSocialButtons(),
+                      SizedBox(height: AppSpacing.md),
 
-                  SizedBox(height: AppSpacing.md),
+                      // ── Email ────────────────────────────────────────
+                      // Text('Email Address', style: AppTextStyles.labelMedium),
+                      // SizedBox(height: AppSpacing.xs),
+                      AppTextField(
+                        controller: _emailController,
+                        label: 'Enter your email',
+                        focusNode: _emailFocus,
+                        prefixIcon: Icon(
+                          Iconsax.sms,
+                          size: AppIconSizes.sm,
+                          color: AppColors.textSecondary,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_phoneFocus);
+                        },
+                        validator: _validateEmail,
+                      ),
 
-                  // // // ── 4. Divider ───────────────────────────────
-                  // _buildDivider(),
+                      SizedBox(height: AppSpacing.md),
 
-                  // SizedBox(height: AppSpacing.lg),
+                      // ── Phone ────────────────────────────────────────
+                      // Text('Phone Number', style: AppTextStyles.labelMedium),
+                      // SizedBox(height: AppSpacing.xs),
+                      _PhoneField(
+                        controller: _phoneController,
+                        focusNode: _phoneFocus,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_passwordFocus);
+                        },
+                        validator: _validatePhone,
+                      ),
 
-                  // ── Terms ─────────────────────────────────────────
-                  Center(
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'By signing up, you agree to our ',
+                      SizedBox(height: AppSpacing.md),
+
+                      // ── Password ─────────────────────────────────────
+                      // Text('Password', style: AppTextStyles.labelMedium),
+                      // SizedBox(height: AppSpacing.xs),
+                      AppTextField(
+                        controller: _passwordController,
+                        label: 'Enter your password',
+                        focusNode: _passwordFocus,
+                        obscureText: _obscurePassword,
+                        prefixIcon: Icon(
+                          Iconsax.lock,
+                          size: AppIconSizes.sm,
+                          color: AppColors.textSecondary,
+                        ),
+                        suffixIcon: _PasswordToggle(
+                          isObscure: _obscurePassword,
+                          onTap: () => setState(
+                            () => _obscurePassword = !_obscurePassword,
+                          ),
+                        ),
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(
+                            context,
+                          ).requestFocus(_confirmPassFocus);
+                        },
+                        validator: _validatePassword,
+                      ),
+
+                      SizedBox(height: AppSpacing.xs),
+
+                      // password strength hint
+                      Text(
+                        'Min 8 characters, one uppercase, one number',
                         style: AppTextStyles.caption.copyWith(
                           color: AppColors.textSecondary,
                         ),
-                        children: [
-                          TextSpan(
-                            text: 'Terms of Service',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(text: ' and '),
-                          TextSpan(
-                            text: 'Privacy Policy',
-                            style: AppTextStyles.caption.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: AppSpacing.md),
 
-                  // ── Login Link ────────────────────────────────────
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Already have an account? ',
-                          style: AppTextStyles.bodyMedium.copyWith(
-                            color: AppColors.textSecondary,
+                      SizedBox(height: AppSpacing.md),
+
+                      // ── Confirm Password ──────────────────────────────
+                      // Text('Confirm Password', style: AppTextStyles.labelMedium),
+                      SizedBox(height: AppSpacing.xs),
+                      AppTextField(
+                        controller: _confirmPassController,
+                        label: 'Re-enter your password',
+                        focusNode: _confirmPassFocus,
+                        obscureText: _obscureConfirmPass,
+                        prefixIcon: Icon(
+                          Iconsax.lock_1,
+                          size: AppIconSizes.sm,
+                          color: AppColors.textSecondary,
+                        ),
+                        suffixIcon: _PasswordToggle(
+                          isObscure: _obscureConfirmPass,
+                          onTap: () => setState(
+                            () => _obscureConfirmPass = !_obscureConfirmPass,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => context.go(AppRoutes.login),
-                          child: Text(
-                            'Sign In',
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) => _register(),
+                        validator: _validateConfirmPassword,
+                      ),
+
+                      SizedBox(height: AppSpacing.xl),
+
+                      // ── Register Button ───────────────────────────────
+                      AppButton(
+                        text: 'Create Account',
+                        isLoading: _isLoading,
+                        onPressed: isLoading ? null : _register,
+                      ),
+
+                      SizedBox(height: AppSpacing.lg),
+
+                      // ── 3. Social Buttons FIRST ──────────────────
+                      _buildSocialButtons(),
+
+                      SizedBox(height: AppSpacing.md),
+
+                      // // // ── 4. Divider ───────────────────────────────
+                      // _buildDivider(),
+
+                      // SizedBox(height: AppSpacing.lg),
+
+                      // ── Terms ─────────────────────────────────────────
+                      Center(
+                        child: Text.rich(
+                          TextSpan(
+                            text: 'By signing up, you agree to our ',
+                            style: AppTextStyles.caption.copyWith(
+                              color: AppColors.textSecondary,
                             ),
+                            children: [
+                              TextSpan(
+                                text: 'Terms of Service',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              TextSpan(text: ' and '),
+                              TextSpan(
+                                text: 'Privacy Policy',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                      SizedBox(height: AppSpacing.md),
 
-                  SizedBox(height: AppSpacing.lg),
-                ],
+                      // ── Login Link ────────────────────────────────────
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Already have an account? ',
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => context.go(AppRoutes.login),
+                              child: Text(
+                                'Sign In',
+                                style: AppTextStyles.bodyMedium.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: AppSpacing.lg),
+                    ],
+                  );
+                },
               ),
             ),
           ),
