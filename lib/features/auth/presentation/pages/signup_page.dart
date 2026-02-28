@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doha_pride_customer/core/router/app_router.dart';
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
@@ -415,25 +417,21 @@ class _SignupPageState extends State<SignupPage> {
   Widget _buildSocialButtons() {
     return Column(
       children: [
-        // Google — full width on its own row
         SocialLoginButton(
           label: 'Continue with Google',
           iconAsset: 'assets/icons/google.svg',
           isLoading: _googleLoading,
           onTap: _anySocialLoading ? () {} : _googleSignIn,
         ),
-
-        SizedBox(height: AppSpacing.sm),
-
-        // Apple — full width on its own row
-        // only show on iOS
-        // if (Platform.isIOS)
-        // SocialLoginButton(
-        //   label: 'Continue with Apple',
-        //   iconAsset: 'assets/icons/apple.svg',
-        //   isLoading: _appleLoading,
-        //   onTap: _anySocialLoading ? () {} : _appleSignIn,
-        // ),
+        if (Platform.isIOS) ...[
+          SizedBox(height: AppSpacing.sm),
+          SocialLoginButton(
+            label: 'Continue with Apple',
+            iconAsset: 'assets/icons/apple.svg',
+            isLoading: _appleLoading,
+            onTap: _anySocialLoading ? () {} : _appleSignIn,
+          ),
+        ],
       ],
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doha_pride_customer/core/router/app_router.dart';
 import 'package:doha_pride_customer/core/theme/app_colors.dart';
 import 'package:doha_pride_customer/core/theme/app_icon_spacing.dart';
@@ -99,7 +101,6 @@ class _SigninPageState extends State<SigninPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-
                     // ── Top flexible space ──────────────────────
                     SizedBox(height: AppSpacing.lg),
 
@@ -235,7 +236,7 @@ class _SigninPageState extends State<SigninPage> {
                     ),
 
                     // SizedBox(height: AppSpacing.lg),
-                    const Spacer(), 
+                    const Spacer(),
 
                     // ── Sign Up Link ───────────────────────────────────
                     Center(
@@ -279,7 +280,7 @@ class _SigninPageState extends State<SigninPage> {
   Widget _buildSocialButtons() {
     return Column(
       children: [
-        // Google — full width on its own row
+        // Google — always visible
         SocialLoginButton(
           label: 'Continue with Google',
           iconAsset: 'assets/icons/google.svg',
@@ -287,17 +288,16 @@ class _SigninPageState extends State<SigninPage> {
           onTap: _anySocialLoading ? () {} : _googleSignIn,
         ),
 
-        SizedBox(height: 12.h),
-
-        // Apple — full width on its own row
-        // only show on iOS
-        // if (Platform.isIOS)
-        SocialLoginButton(
-          label: 'Continue with Apple',
-          iconAsset: 'assets/icons/apple.svg',
-          isLoading: _appleLoading,
-          onTap: _anySocialLoading ? () {} : _appleSignIn,
-        ),
+        // Apple — visible only on iOS
+        if (Platform.isIOS) ...[
+          SizedBox(height: 12.h),
+          SocialLoginButton(
+            label: 'Continue with Apple',
+            iconAsset: 'assets/icons/apple.svg',
+            isLoading: _appleLoading,
+            onTap: _anySocialLoading ? () {} : _appleSignIn,
+          ),
+        ],
       ],
     );
   }
